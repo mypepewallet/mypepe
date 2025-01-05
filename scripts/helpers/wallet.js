@@ -3,6 +3,7 @@ import * as bip32 from 'bip32';
 import * as bip39 from 'bip39';
 import * as bitcoin from 'bitcoinjs-lib';
 import * as bitcoinMessage from 'bitcoinjs-message';
+import bs58check from 'bs58check';
 import * as crypto from 'crypto';
 import { ec as EC } from 'elliptic';
 import * as Validator from 'multicoin-address-validator';
@@ -18,16 +19,16 @@ import { getLocalValue, setLocalValue } from './storage';
 
 const ec = new EC('secp256k1');
 
-// Dogecoin mainnet
+// Pepecoin mainnet
 export const network = {
-  messagePrefix: '\x19Dogecoin Signed Message:\n',
-  bech32: 'dc',
-  bip44: 3,
+  messagePrefix: '\x19Pepecoin Signed Message:\n',
+  bech32: 'pc',
+  bip44: 3434,
   bip32: {
     public: 0x02facafd,
     private: 0x02fac398,
   },
-  pubKeyHash: 0x1e,
+  pubKeyHash: 0x38,
   scriptHash: 0x16,
   wif: 0x9e,
 };
@@ -70,7 +71,11 @@ export function decodeRawTx(rawTx) {
 }
 
 export function validateAddress(data) {
-  return Validator.validate(data, 'doge', 'prod');
+  // convert pepecoin address to doge address for validate
+  const dogeAddress = bs58check.encode(
+    Buffer.concat([Buffer.from([0x1e]), bs58check.decode(data).slice(1)])
+  );
+  return Validator.validate(dogeAddress, 'doge', 'prod');
 }
 
 export const validateTransaction = ({
