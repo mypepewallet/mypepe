@@ -20,28 +20,15 @@ import { getLocalValue, setLocalValue } from './storage';
 const ec = new EC('secp256k1');
 
 // Pepecoin mainnet
-// export const network = {
-//   messagePrefix: '\x19Pepecoin Signed Message:\n',
-//   bech32: 'pc',
-//   bip44: 3434,
-//   bip32: {
-//     public: 0x02facafd,
-//     private: 0x02fac398,
-//   },
-//   pubKeyHash: 0x38,
-//   scriptHash: 0x16,
-//   wif: 0x9e,
-// };
-
 export const network = {
-  messagePrefix: '\x19Dogecoin Signed Message:\n',
-  bech32: 'dc',
-  bip44: 3,
+  messagePrefix: '\x19Pepecoin Signed Message:\n',
+  bech32: 'pc',
+  bip44: 3434,
   bip32: {
     public: 0x02facafd,
     private: 0x02fac398,
   },
-  pubKeyHash: 0x1e,
+  pubKeyHash: 0x38,
   scriptHash: 0x16,
   wif: 0x9e,
 };
