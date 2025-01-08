@@ -129,7 +129,7 @@ async function run() {
       method: 'sendrawtransaction',
       params: [tx.toString()],
     };
-    const jsonrpcRes = (await mydoge.post('/wallet/rpc', jsonrpcReq)).data;
+    const jsonrpcRes = (await mydoge.post('/api/v1/wallet/rpc', jsonrpcReq)).data;
     console.log('\nresult', jsonrpcRes.result);
   }
 }

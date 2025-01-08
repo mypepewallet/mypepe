@@ -267,7 +267,7 @@ export function inscribe(
 export async function getDRC20Inscriptions(address, ticker) {
   const query = (
     await mydoge.get(
-      `/inscriptions/${address}?filter=drc20&ticker=${encodeURIComponent(
+      `/api/v1/tokens/inscriptions/${address}?ticker=${encodeURIComponent(
         ticker
       )}`
     )
@@ -278,7 +278,7 @@ export async function getDRC20Inscriptions(address, ticker) {
 
 export async function getDRC20Balances(address, ticker) {
   const result = (
-    await mydoge.get(`/drc20/${address}${ticker ? `?ticker=${ticker}` : ''}`)
+    await mydoge.get(`/api/v1/tokens/drc20/${address}${ticker ? `?ticker=${ticker}` : ''}`)
   ).data;
 
   return result.balances;
@@ -286,7 +286,7 @@ export async function getDRC20Balances(address, ticker) {
 
 export async function getDunesBalances(address, ticker) {
   const result = (
-    await mydoge.get(`/dunes/${address}${ticker ? `?ticker=${ticker}` : ''}`)
+    await mydoge.get(`/api/v1/tokens/dunes/${address}${ticker ? `?ticker=${ticker}` : ''}`)
   ).data;
 
   return result.balances;
@@ -295,7 +295,7 @@ export async function getDunesBalances(address, ticker) {
 async function getUtxos(address, cursor, result, filter, tx = null) {
   const query = (
     await mydoge.get(
-      `/utxos/${address}?filter=${filter}${cursor ? `&cursor=${cursor}` : ''}`
+      `/api/v1/wallet/address/${address}/utxos?filter=${filter}${cursor ? `&cursor=${cursor}` : ''}`
     )
   ).data;
 

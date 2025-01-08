@@ -39,8 +39,7 @@ export const TokenModal = ({ isOpen, onClose, token }) => {
   const tBalance = protocol === 'drc20' ? transferableBalance : overallBalance;
 
   const fetchTokenDetails = useCallback(() => {
-    mydoge
-      .get(`/${protocol}/data/${ticker}`)
+    mydoge.get(`/api/v1/tokens/${protocol}/data/${ticker}`)
       .then((res) => {
         setTokenDetails(res.data);
       })

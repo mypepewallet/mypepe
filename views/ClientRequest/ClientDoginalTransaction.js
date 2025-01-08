@@ -81,7 +81,7 @@ export function ClientDoginalTransaction({
       }
 
       const meta = await mydoge.get(
-        `/inscription/${inscription.inscription_id}`
+        `/api/v1/tokens/inscription/${inscription.inscription_id}`
       );
 
       setSelectedNFT(meta.data);

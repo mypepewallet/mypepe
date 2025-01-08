@@ -117,10 +117,11 @@ async function onCreateTransaction({ data = {}, sendResponse } = {}) {
   const amount = sb.toBitcoin(amountSatoshi);
 
   try {
-    const response = await mydoge.post('/v3/tx/prepare', {
+    const response = await mydoge.post('/api/v1/transactions/prepare/send', {
       sender: data.senderAddress,
       recipient: data.recipientAddress,
       amount,
+      fee: 10000
     });
     const { rawTx, fee, amount: resultAmount } = response.data;
     let amountMismatch = false;
@@ -143,7 +144,7 @@ async function onCreateTransaction({ data = {}, sendResponse } = {}) {
 
 async function onCreateNFTTransaction({ data = {}, sendResponse } = {}) {
   try {
-    const response = await mydoge.post('/tx/prepare/inscription', {
+    const response = await mydoge.post('/api/v1/transactions/prepare/inscription', {
       sender: data.address,
       recipient: data.recipientAddress,
       location: data.location,
@@ -195,7 +196,7 @@ async function onInscribeTransferTransaction({ data = {}, sendResponse } = {}) {
       method: 'estimatesmartfee',
       params: [BLOCK_CONFIRMATIONS], // confirm within x blocks
     };
-    const feeData = (await mydoge.post('/wallet/rpc', smartfeeReq)).data;
+    const feeData = (await mydoge.post('/api/v1/wallet/rpc', smartfeeReq)).data;
     const feePerKB = sb.toSatoshi(feeData.result.feerate * 2 || FEE_RATE_KB);
 
     console.log('found feePerKB', feePerKB);
@@ -254,7 +255,7 @@ async function onInscribeTransferTransaction({ data = {}, sendResponse } = {}) {
 
 async function onCreateDunesTransaction({ data = {}, sendResponse } = {}) {
   try {
-    const response = await mydoge.post('/tx/prepare/dune', {
+    const response = await mydoge.post('/api/v1/transactions/prepare/dune', {
       sender: data.walletAddress,
       recipient: data.recipientAddress,
       amount: data.tokenAmount,
@@ -295,7 +296,7 @@ function onSendTransaction({ data = {}, sendResponse } = {}) {
           method: 'sendrawtransaction',
           params: [signed],
         };
-        const jsonrpcRes = (await mydoge.post('/wallet/rpc', jsonrpcReq)).data;
+        const jsonrpcRes = (await mydoge.post('/api/v1/wallet/rpc', jsonrpcReq)).data;
 
         // Open offscreen notification page to handle transaction status notifications
         chrome.offscreen
@@ -358,7 +359,7 @@ async function onSendInscribeTransfer({ data = {}, sendResponse } = {}) {
         jsonrpcReq.params[0]
       );
 
-      const jsonrpcRes = (await mydoge.post('/wallet/rpc', jsonrpcReq)).data;
+      const jsonrpcRes = (await mydoge.post('/api/v1/wallet/rpc', jsonrpcReq)).data;
       await cacheSignedTx(signed);
 
       results.push(jsonrpcRes.result);
@@ -444,7 +445,7 @@ async function onSendPsbt({ data = {}, sendResponse } = {}) {
 
     console.log(`sending signed psbt`, jsonrpcReq.params[0]);
 
-    const jsonrpcRes = (await mydoge.post('/wallet/rpc', jsonrpcReq)).data;
+    const jsonrpcRes = (await mydoge.post('/api/v1/wallet/rpc', jsonrpcReq)).data;
 
     console.log(`tx id ${jsonrpcRes.result}`);
 
@@ -575,9 +576,7 @@ function onCreateWallet({ data = {}, sendResponse } = {}) {
 async function onGetDogecoinPrice({ sendResponse } = {}) {
   try {
     const response = (
-      await mydoge.get('/wallet/info', {
-        params: { route: '/tickers/?currency=usd' },
-      })
+      await mydoge.get('/api/v1/wallet/tickers?currency=usd')
     ).data;
 
     sendResponse?.(response.rates);
@@ -593,9 +592,7 @@ async function onGetAddressBalance({ data, sendResponse } = {}) {
     const balances = await Promise.all(
       addresses.map(async (address) => {
         const response = (
-          await mydoge.get('/wallet/info', {
-            params: { route: `/address/${address}` },
-          })
+          await mydoge.get(`/api/v1/wallet/address/${address}`)
         ).data;
 
         return response.balance;
@@ -617,11 +614,10 @@ async function onGetTransactions({ data, sendResponse } = {}) {
 
   try {
     const response = (
-      await mydoge.get('/wallet/info', {
+      await mydoge.get(`/api/v1/wallet/address/${data.address}/transactions`, {
         params: {
-          route: `/address/${data.address}?page=${
-            data.page || 1
-          }&pageSize=${TRANSACTION_PAGE_SIZE}`,
+          page: data.page || 1,
+          pageSize: TRANSACTION_PAGE_SIZE
         },
       })
     ).data;
@@ -649,7 +645,7 @@ async function onGetTransactions({ data, sendResponse } = {}) {
 async function onGetTransactionDetails({ data, sendResponse } = {}) {
   try {
     const transaction = (
-      await mydoge.get('wallet/info', { params: { route: `/tx/${data.txId}` } })
+      await mydoge.get(`/api/v1/transactions/${data.txId}`)
     ).data;
 
     sendResponse?.(transaction);

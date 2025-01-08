@@ -78,7 +78,7 @@ export const useTransactions = ({ wallet, selectedAddressIndex, navigate }) => {
     async ({ currentNFTs = [], cursor } = {}) => {
       setNFTsLoading(true);
       try {
-        const res = (await mydoge.get(`/inscriptions/${walletAddress}`)).data;
+        const res = (await mydoge.get(`/api/v1/tokens/collections/${walletAddress}`)).data;
 
         setNFTs(
           [...currentNFTs, ...(res.list ?? [])].sort(
@@ -103,8 +103,8 @@ export const useTransactions = ({ wallet, selectedAddressIndex, navigate }) => {
     async ({ cursor, currentTokens = [] } = {}) => {
       setTokensLoading(true);
       try {
-        const drc20res = (await mydoge.get(`/drc20/${walletAddress}`)).data;
-        const dunes20res = (await mydoge.get(`/dunes/${walletAddress}`)).data;
+        const drc20res = (await mydoge.get(`/api/v1/tokens/drc20/${walletAddress}`)).data;
+        const dunes20res = (await mydoge.get(`/api/v1/tokens/dunes/${walletAddress}`)).data;
 
         setTokens(
           [

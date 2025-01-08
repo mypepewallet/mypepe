@@ -108,7 +108,7 @@ export async function getCachedTx(txid) {
 
   if (!tx || !tx.vout || tx.confirmations === 0) {
     tx = (
-      await mydoge.get('/wallet/info', { params: { route: `/tx/${txid}` } })
+      await mydoge.get(`/api/v1/transactions/${txid}`)
     ).data;
     await setLocalValue({ [txid]: tx });
   }

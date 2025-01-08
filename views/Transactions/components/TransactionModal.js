@@ -26,7 +26,7 @@ export const TransactionModal = ({
     (async () => {
       if (isOpen) {
         const tx = (
-          await mydoge.get('/wallet/info', { params: { route: `/tx/${id}` } })
+          await mydoge.get(`/api/v1/transactions/${id}`)
         ).data;
         setConf(tx.confirmations);
         await setLocalValue({ [id]: tx });
