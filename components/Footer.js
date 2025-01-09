@@ -7,7 +7,7 @@ export const Footer = ({ ...props }) => {
 
   return (
     <Text textAlign='center' mt='80px' color='gray.400' {...props}>
-      Need help using MyDoge?{'\n'}
+      Need help using MyPepe?{'\n'}
       <Text
         color='brandYellow.500'
         underline

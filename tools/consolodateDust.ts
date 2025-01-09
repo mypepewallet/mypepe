@@ -5,7 +5,7 @@ import sb from 'satoshi-bitcoin';
 
 dotenv.config();
 
-import { mydoge } from '../scripts/api';
+import { mypepe } from '../scripts/api';
 import { getSpendableUtxos } from '../scripts/helpers/doginals';
 import { network } from '../scripts/helpers/wallet';
 import { MIN_TX_AMOUNT } from '../scripts/helpers/constants';
@@ -82,7 +82,7 @@ async function run() {
     method: 'sendrawtransaction',
     params: [tx.toString()],
   };
-  const jsonrpcRes = (await mydoge.post('/api/v1/wallet/rpc', jsonrpcReq)).data;
+  const jsonrpcRes = (await mypepe.post('/api/v1/wallet/rpc', jsonrpcReq)).data;
   console.log('\nresult', jsonrpcRes.result);
 }
 

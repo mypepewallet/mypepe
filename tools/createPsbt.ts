@@ -5,7 +5,7 @@ import sb from 'satoshi-bitcoin';
 
 dotenv.config();
 
-import { mydoge } from '../scripts/api';
+import { mypepe } from '../scripts/api';
 import { network } from '../scripts/helpers/wallet';
 
 /*
@@ -32,14 +32,14 @@ async function run() {
   console.log('initialized keypairs, amount, fee');
 
   const utxos1 = (
-    await mydoge.get(`/api/v1/wallet/address/${changeAddress}/utxos`)
+    await mypepe.get(`/api/v1/wallet/address/${changeAddress}/utxos`)
   ).data.sort((a, b) => {
     const aValue = Number(a.value);
     const bValue = Number(b.value);
     return bValue > aValue ? 1 : bValue < aValue ? -1 : a.height - b.height;
   });
   const utxos2 = (
-    await mydoge.get(`/api/v1/wallet/address/${signerAddress}/utxos`)
+    await mypepe.get(`/api/v1/wallet/address/${signerAddress}/utxos`)
   ).data.sort((a, b) => {
     const aValue = Number(a.value);
     const bValue = Number(b.value);
@@ -68,9 +68,9 @@ async function run() {
   const index1 = utxos1[0].vout;
   const index2 = utxos2[0].vout;
   const index3 = utxos2[1].vout;
-  const tx1 = await mydoge.get(`/api/v1/transactions/${utxos1[0].txid}`);
-  const tx2 = await mydoge.get(`/api/v1/transactions/${utxos2[0].txid}`);
-  const tx3 = await mydoge.get(`/api/v1/transactions/${utxos2[1].txid}`);
+  const tx1 = await mypepe.get(`/api/v1/transactions/${utxos1[0].txid}`);
+  const tx2 = await mypepe.get(`/api/v1/transactions/${utxos2[0].txid}`);
+  const tx3 = await mypepe.get(`/api/v1/transactions/${utxos2[1].txid}`);
   const value1 = sb.toBitcoin(tx1.data.vout[index1].value);
   const value2 = sb.toBitcoin(tx2.data.vout[index2].value);
   const value3 = sb.toBitcoin(tx3.data.vout[index3].value);

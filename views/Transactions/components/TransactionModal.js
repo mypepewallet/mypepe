@@ -6,10 +6,10 @@ import { FiArrowUpRight, FiCopy } from 'react-icons/fi';
 import { BigButton } from '../../../components/Button';
 import { InscriptionIndicator } from '../../../components/InscriptionIndicator';
 import { useCopyText } from '../../../hooks/useCopyText';
-import { mydoge } from '../../../scripts/api';
+import { mypepe } from '../../../scripts/api';
 import { TRANSACTION_TYPES } from '../../../scripts/helpers/constants';
 import { setLocalValue } from '../../../scripts/helpers/storage';
-import { formatSatoshisAsDoge } from '../../../utils/formatters';
+import { formatSatoshisAsPepe } from '../../../utils/formatters';
 
 export const TransactionModal = ({
   isOpen,
@@ -26,7 +26,7 @@ export const TransactionModal = ({
     (async () => {
       if (isOpen) {
         const tx = (
-          await mydoge.get(`/api/v1/transactions/${id}`)
+          await mypepe.get(`/api/v1/transactions/${id}`)
         ).data;
         setConf(tx.confirmations);
         await setLocalValue({ [id]: tx });
@@ -87,7 +87,7 @@ export const TransactionModal = ({
               fontWeight='semibold'
               pb='12px'
             >
-              Ɖ{formatSatoshisAsDoge(amount, 3)}
+              Ɖ{formatSatoshisAsPepe(amount, 3)}
             </Text>
             <HStack justifyContent='center' w='100%' mb='8px'>
               <InscriptionIndicator
@@ -131,11 +131,11 @@ export const TransactionModal = ({
             </HStack>
             <Box pt='32px'>
               <BigButton
-                onPress={() => window.open(`https://sochain.com/tx/DOGE/${id}`)}
+                onPress={() => window.open(`https://pepeblocks.com/tx/${id}`)}
                 variant='secondary'
                 px='28px'
               >
-                View on SoChain <FiArrowUpRight />
+                View on Pepeblocks <FiArrowUpRight />
               </BigButton>
             </Box>
           </VStack>

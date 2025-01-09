@@ -40,8 +40,8 @@ export function ClientPSBT({
 
   const [psbt, setPsbt] = useState(null);
   const [inputs, setInputs] = useState([]);
-  const [dogeAmount, setDogeAmount] = useState(0);
-  const [dogeFee, setDogeFee] = useState(0.0);
+  const [pepeAmount, setPepeAmount] = useState(0);
+  const [pepeFee, setPepeFee] = useState(0.0);
   const [indexes] = useState([indexesParam].flat());
 
   useEffect(() => {
@@ -63,7 +63,7 @@ export function ClientPSBT({
         ({ fee }) => {
           console.log('fee', fee);
           if (fee) {
-            setDogeFee(fee);
+            setPepeFee(fee);
           }
         }
       );
@@ -115,7 +115,7 @@ export function ClientPSBT({
           });
         }
 
-        setDogeAmount(amount);
+        setPepeAmount(amount);
         setInputs(mappedInputs);
       }
     })();
@@ -152,7 +152,7 @@ export function ClientPSBT({
 
   const onRejectTransaction = useCallback(() => {
     handleResponse({
-      toastMessage: `MyDoge failed to authorize the transaction to ${origin}`,
+      toastMessage: `MyPepe failed to authorize the transaction to ${origin}`,
       toastTitle: 'Transaction Rejected',
       error: 'User refused transaction',
     });
@@ -283,10 +283,10 @@ export function ClientPSBT({
         </HStack>
 
         <Text fontSize='3xl' fontWeight='semibold' pt='6px'>
-          Ð{dogeAmount}
+          Ð{pepeAmount}
         </Text>
         <Text fontSize='13px' fontWeight='semibold' pt='6px'>
-          Network fee Ð{dogeFee}
+          Network fee Ð{pepeFee}
         </Text>
         <HStack alignItems='center' mt='60px' space='12px'>
           <BigButton
@@ -312,7 +312,7 @@ export function ClientPSBT({
         origin={origin}
         onSubmit={onSubmit}
         loading={loading}
-        dogeAmount={dogeAmount}
+        pepeAmount={pepeAmount}
         signOnly={signOnly}
       />
       <Modal
@@ -466,7 +466,7 @@ const ConfirmationModal = ({
   origin,
   onSubmit,
   loading,
-  dogeAmount,
+  pepeAmount,
   signOnly,
 }) => {
   const cancelRef = useRef();
@@ -491,7 +491,7 @@ const ConfirmationModal = ({
             <VStack alignItems='center'>
               <Text>
                 Confirm transaction to {signOnly ? 'sign' : 'send'}{' '}
-                <Text fontWeight='bold'>Ð{dogeAmount}</Text>
+                <Text fontWeight='bold'>Ð{pepeAmount}</Text>
               </Text>
             </VStack>
           </AlertDialog.Body>

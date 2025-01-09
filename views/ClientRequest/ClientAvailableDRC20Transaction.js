@@ -32,7 +32,7 @@ export function ClientAvailableDRC20Transaction({
 
   const onRejectTransaction = useCallback(() => {
     handleResponse({
-      toastMessage: `MyDoge failed to authorize the transaction to ${origin}`,
+      toastMessage: `MyPepe failed to authorize the transaction to ${origin}`,
       toastTitle: 'Transaction Rejected',
       error: 'User refused transaction',
     });

@@ -6,11 +6,11 @@ import { useInterval } from '../../../hooks/useInterval';
 import { MESSAGE_TYPES } from '../../../scripts/helpers/constants';
 import { sendMessage } from '../../../scripts/helpers/message';
 import { logError } from '../../../utils/error';
-import { asFiat, formatSatoshisAsDoge } from '../../../utils/formatters';
+import { asFiat, formatSatoshisAsPepe } from '../../../utils/formatters';
 
 const EyeDisabled = 'assets/eye-disabled.svg';
 const EyeEnabled = 'assets/eye-enabled.svg';
-const MydogeIcon = 'assets/mydoge-icon.svg';
+const MypepeIcon = 'assets/mypepe-icon.svg';
 
 const QUERY_INTERVAL = 10000;
 
@@ -35,12 +35,12 @@ export function Balance({ walletAddress }) {
     );
   }, [walletAddress]);
 
-  const getDogecoinPrice = useCallback(() => {
-    sendMessage({ message: MESSAGE_TYPES.GET_DOGECOIN_PRICE }, ({ usd }) => {
+  const getPepecoinPrice = useCallback(() => {
+    sendMessage({ message: MESSAGE_TYPES.GET_PEPECOIN_PRICE }, ({ usd }) => {
       if (usd) {
         setUSDPrice(usd);
       } else {
-        logError(new Error('Failed to get Dogecoin price'));
+        logError(new Error('Failed to get Pepecoin price'));
       }
     });
   }, []);
@@ -51,7 +51,7 @@ export function Balance({ walletAddress }) {
         return;
       }
       getAddressBalance();
-      getDogecoinPrice();
+      getPepecoinPrice();
     },
     QUERY_INTERVAL,
     true
@@ -62,14 +62,14 @@ export function Balance({ walletAddress }) {
   return (
     <VStack px='16px'>
       <Image
-        src={MydogeIcon}
+        src={MypepeIcon}
         width={66}
         height={66}
         position='absolute'
         top={0}
         alignSelf='center'
         zIndex={2}
-        alt='Mydoge icon'
+        alt='Mypepe icon'
       />
       <VStack
         bg='yellow.100'
@@ -88,7 +88,7 @@ export function Balance({ walletAddress }) {
             <Text secondary fontWeight='700' color='black' fontSize='35px'>
               {!balanceVisible
                 ? typeof balance === 'number'
-                  ? `Ɖ${formatSatoshisAsDoge(balance, 3)}`
+                  ? `Ɖ${formatSatoshisAsPepe(balance, 3)}`
                   : ' '
                 : 'Ɖ******'}
             </Text>

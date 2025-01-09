@@ -27,9 +27,9 @@ export function ClientConnect({ params, wallet, handleResponse }) {
 
   const onRejectConnection = useCallback(() => {
     handleResponse({
-      toastMessage: `MyDoge failed to connected to ${origin}`,
+      toastMessage: `MyPepe failed to connected to ${origin}`,
       toastTitle: 'Connection Failed',
-      error: 'Unable to connect to MyDoge',
+      error: 'Unable to connect to MyPepe',
     });
   }, [handleResponse, origin]);
 
@@ -75,7 +75,7 @@ export function ClientConnect({ params, wallet, handleResponse }) {
         <FaLink />
       </Box>
       <Text fontSize='2xl' pb='6px'>
-        Connect with <Text fontWeight='bold'>MyDoge</Text>
+        Connect with <Text fontWeight='bold'>MyPepe</Text>
       </Text>
       <Text fontSize='sm' color='gray.600'>
         Select the address you want to use with this site
@@ -175,7 +175,7 @@ const ConfirmationModal = ({
   const cancelRef = useRef();
   const onConnect = useCallback(() => {
     handleResponse({
-      toastMessage: `MyDoge has connected to ${origin}`,
+      toastMessage: `MyPepe has connected to ${origin}`,
       toastTitle: 'Connection Success',
       data: {
         approved: true,

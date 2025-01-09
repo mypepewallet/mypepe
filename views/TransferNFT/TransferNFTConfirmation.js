@@ -42,7 +42,7 @@ export const TransferNFTConfirmation = ({
         const error = validateTransaction({
           senderAddress: walletAddress,
           recipientAddress: formData.address?.trim(),
-          dogeAmount: formData.dogeAmount,
+          pepeAmount: formData.pepeAmount,
           addressBalance,
         });
         if (error) {
@@ -101,7 +101,7 @@ export const TransferNFTConfirmation = ({
     );
   }, [
     formData.address,
-    formData.dogeAmount,
+    formData.pepeAmount,
     formData.rawTx,
     navigate,
     selectedAddressIndex,
@@ -154,7 +154,7 @@ export const TransferNFTConfirmation = ({
         </Text>
       </HStack>
       <Text fontSize='3xl' fontWeight='semibold' pt='6px'>
-        Ð{formData.dogeAmount}
+        Ð{formData.pepeAmount}
       </Text>
       <Text fontSize='13px' fontWeight='semibold' pt='6px'>
         Network fee Ð{formData.fee}

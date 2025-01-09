@@ -17,7 +17,7 @@ import { BigButton } from '../../components/Button';
 import { ToastRender } from '../../components/ToastRender';
 import { MESSAGE_TYPES } from '../../scripts/helpers/constants';
 import { sendMessage } from '../../scripts/helpers/message';
-import { sanitizeDogeInput } from '../../utils/formatters';
+import { sanitizePepeInput } from '../../utils/formatters';
 
 const MAX_CHARACTERS = 10000;
 
@@ -43,24 +43,24 @@ export const TransferDunesAmount = ({
       }
 
       setErrors({ ...errors, tokenAmount: '' });
-      const cleanText = sanitizeDogeInput(text || '0', selectedToken.decimals);
+      const cleanText = sanitizePepeInput(text || '0', selectedToken.decimals);
 
       if (cleanText.length > MAX_CHARACTERS) {
         return;
       }
 
-      const dogeAmount = (
-        parseFloat(cleanText) * selectedToken.dogePrice
+      const pepeAmount = (
+        parseFloat(cleanText) * selectedToken.pepePrice
       ).toFixed(8);
 
       setFormData({
         ...formData,
-        dogeAmount,
+        pepeAmount,
         tokenAmount: cleanText,
       });
     },
     [
-      selectedToken.dogePrice,
+      selectedToken.pepePrice,
       selectedToken.decimals,
       errors,
       formData,
@@ -97,7 +97,7 @@ export const TransferDunesAmount = ({
               ...formData,
               rawTx,
               fee,
-              dogeAmount: amount,
+              pepeAmount: amount,
             });
             setFormPage('confirmationDunes');
             setLoading(false);

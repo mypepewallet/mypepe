@@ -14,7 +14,7 @@ import { FiExternalLink } from 'react-icons/fi';
 
 import { BigButton } from '../../../components/Button';
 import { useAppContext } from '../../../hooks/useAppContext';
-import { formatSatoshisAsDoge } from '../../../utils/formatters';
+import { formatSatoshisAsPepe } from '../../../utils/formatters';
 import { NFTView } from './NFTView';
 
 export const NFTModal = ({ isOpen, onClose, nft }) => {
@@ -68,7 +68,7 @@ export const NFTModal = ({ isOpen, onClose, nft }) => {
                 paddingY='1px'
               >
                 <Text fontWeight='semibold'>
-                  Ɖ {formatSatoshisAsDoge(outputValue, 3)}
+                  Ɖ {formatSatoshisAsPepe(outputValue, 3)}
                 </Text>
               </Box>
             </Box>

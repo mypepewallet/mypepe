@@ -4,7 +4,7 @@ import TimeAgo from 'timeago-react';
 
 import { InscriptionIndicator } from '../../../components/InscriptionIndicator';
 import { useAppContext } from '../../../hooks/useAppContext';
-import { formatSatoshisAsDoge, is69, is420 } from '../../../utils/formatters';
+import { formatSatoshisAsPepe, is69, is420 } from '../../../utils/formatters';
 
 export const Transaction = ({
   transaction: { address, id, blockTime, type, amount, confirmations },
@@ -69,14 +69,14 @@ export const Transaction = ({
                 fontSize='12px'
                 fontWeight='bold'
                 _light={{
-                  color: is420(formatSatoshisAsDoge(amount, 3))
+                  color: is420(formatSatoshisAsPepe(amount, 3))
                     ? 'green.600'
                     : type === 'outgoing'
                     ? 'blue.500'
                     : 'green.500',
                 }}
                 _dark={{
-                  color: is420(formatSatoshisAsDoge(amount, 3))
+                  color: is420(formatSatoshisAsPepe(amount, 3))
                     ? 'green.300'
                     : type === 'outgoing'
                     ? 'blue.400'
@@ -84,10 +84,10 @@ export const Transaction = ({
                 }}
               >
                 {type === 'outgoing' ? '-' : '+'}{' '}
-                {formatSatoshisAsDoge(amount, 3)}
+                {formatSatoshisAsPepe(amount, 3)}
               </Text>
               <Text fontSize='sm' fontWeight='bold'>
-                {is69(formatSatoshisAsDoge(amount, 3)) && ' 😏'}
+                {is69(formatSatoshisAsPepe(amount, 3)) && ' 😏'}
               </Text>
             </HStack>
           </VStack>

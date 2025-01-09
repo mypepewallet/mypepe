@@ -111,7 +111,7 @@ export const TransferDunesConfirmation = ({
       <RecipientAddress address={formData.address} />
 
       <Text fontSize='3xl' fontWeight='semibold' pt='6px'>
-        Ð{formData.dogeAmount}
+        Ð{formData.pepeAmount}
       </Text>
       <Text fontSize='13px' fontWeight='semibold' pt='6px'>
         Network fee Ð{formData.fee}

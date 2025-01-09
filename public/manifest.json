@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "MyDoge - Dogecoin Wallet",
+  "name": "MyPepe - Pepecoin Wallet",
   "version": "1.3.1",
-  "description": "Dogecoin wallet for Chrome browser",
+  "description": "Pepecoin wallet for Chrome browser",
   "permissions": ["storage", "tabs", "notifications", "offscreen"],
   "host_permissions": ["http://*/*", "https://*/*"],
   "background": {
@@ -10,10 +10,10 @@
     "type": "module"
   },
   "icons": {
-    "16": "assets/mydoge16.png",
-    "32": "assets/mydoge32.png",
-    "48": "assets/mydoge48.png",
-    "128": "assets/mydoge128.png"
+    "16": "assets/mypepe16.png",
+    "32": "assets/mypepe32.png",
+    "48": "assets/mypepe48.png",
+    "128": "assets/mypepe128.png"
   },
   "content_scripts": [
     {
@@ -28,7 +28,7 @@
     }
   ],
   "action": {
-    "default_title": "MyDoge",
+    "default_title": "MyPepe",
     "default_popup": "index.html"
   }
 }

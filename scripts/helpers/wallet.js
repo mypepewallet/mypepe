@@ -1,4 +1,3 @@
-// import { DogecoinJS } from '@mydogeofficial/dogecoin-js';
 import * as bip32 from 'bip32';
 import * as bip39 from 'bip39';
 import * as bitcoin from 'bitcoinjs-lib';
@@ -81,16 +80,16 @@ export function validateAddress(data) {
 export const validateTransaction = ({
   senderAddress,
   recipientAddress,
-  dogeAmount,
+  pepeAmount,
   addressBalance,
 }) => {
   if (!validateAddress(recipientAddress)) {
     return 'Invalid address';
   } else if (senderAddress.trim() === recipientAddress.trim()) {
     return 'Cannot send to yourself';
-  } else if (!Number(dogeAmount) || Number(dogeAmount) < MIN_TX_AMOUNT) {
-    return 'Invalid Doge amount';
-  } else if (Number(dogeAmount) > sb.toBitcoin(addressBalance)) {
+  } else if (!Number(pepeAmount) || Number(pepeAmount) < MIN_TX_AMOUNT) {
+    return 'Invalid Pepe amount';
+  } else if (Number(pepeAmount) > sb.toBitcoin(addressBalance)) {
     return 'Insufficient balance';
   }
   return undefined;

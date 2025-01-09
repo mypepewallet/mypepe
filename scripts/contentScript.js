@@ -12,7 +12,7 @@ import {
 } from './helpers/doginals';
 
 (() => {
-  // Inject doge API to all websites
+  // Inject pepe API to all websites
   function injectScript(filePath, tag) {
     const node = document.getElementsByTagName(tag)[0];
     const script = document.createElement('script');
@@ -43,7 +43,7 @@ import {
       (response) => {
         if (!response) {
           handleError({
-            errorMessage: 'Unable to connect to MyDoge',
+            errorMessage: 'Unable to connect to MyPepe',
             origin,
             messageType: MESSAGE_TYPES.CLIENT_REQUEST_CONNECTION_RESPONSE,
           });
@@ -198,7 +198,7 @@ import {
           origin
         );
       } else {
-        throw new Error('MyDoge is not connected to this website');
+        throw new Error('MyPepe is not connected to this website');
       }
     } catch (e) {
       handleError({
@@ -228,7 +228,7 @@ import {
                     confirmations: transaction.confirmations,
                     status:
                       transaction.confirmations > 0 ? 'confirmed' : 'pending',
-                    dogeAmount: transaction.vout[0].value,
+                    pepeAmount: transaction.vout[0].value,
                     blockTime: transaction.blockTime,
                     address: transaction.vout[0].addresses[0],
                   },

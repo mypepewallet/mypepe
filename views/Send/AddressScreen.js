@@ -65,7 +65,7 @@ export const AddressScreen = ({
       </Text>
       <Input
         variant='filled'
-        placeholder='Send to DOGE address'
+        placeholder='Send to PEPE address'
         py='14px'
         focusOutlineColor='brandYellow.500'
         _hover={{

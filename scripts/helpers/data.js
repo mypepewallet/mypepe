@@ -16,7 +16,7 @@ export const getConnectedClient = (origin) => {
         if (client) {
           resolve(client);
         } else {
-          reject(new Error('MyDoge is not connected to this website'));
+          reject(new Error('MyPepe is not connected to this website'));
         }
       }
     );

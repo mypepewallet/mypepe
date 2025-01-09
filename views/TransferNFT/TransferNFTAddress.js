@@ -63,7 +63,7 @@ export const TransferNFTAddress = ({
               ...formData,
               rawTx,
               fee,
-              dogeAmount: amount,
+              pepeAmount: amount,
             });
             setFormPage('confirmation');
             setLoading(false);

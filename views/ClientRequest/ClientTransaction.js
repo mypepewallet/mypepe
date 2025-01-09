@@ -26,7 +26,7 @@ export function ClientTransaction({
   connectedAddressIndex,
   handleResponse,
 }) {
-  const { originTabId, origin, recipientAddress, dogeAmount } = params;
+  const { originTabId, origin, recipientAddress, pepeAmount } = params;
 
   const [pageLoading, setPageLoading] = useState(false);
 
@@ -44,7 +44,7 @@ export function ClientTransaction({
       const txData = {
         senderAddress: connectedClient.address,
         recipientAddress,
-        dogeAmount,
+        pepeAmount,
       };
 
       const error = validateTransaction({
@@ -79,7 +79,7 @@ export function ClientTransaction({
     })();
   }, [
     connectedClient.address,
-    dogeAmount,
+    pepeAmount,
     handleResponse,
     origin,
     originTabId,
@@ -93,7 +93,7 @@ export function ClientTransaction({
 
   const onRejectTransaction = useCallback(() => {
     handleResponse({
-      toastMessage: `MyDoge failed to authorize the transaction to ${origin}`,
+      toastMessage: `MyPepe failed to authorize the transaction to ${origin}`,
       toastTitle: 'Transaction Rejected',
       error: 'User refused transaction',
     });
@@ -125,7 +125,7 @@ export function ClientTransaction({
         <RecipientAddress address={recipientAddress} />
 
         <Text fontSize='3xl' fontWeight='semibold' pt='6px'>
-          Ð{dogeAmount}
+          Ð{pepeAmount}
         </Text>
         <Text fontSize='13px' fontWeight='semibold' pt='6px'>
           Network fee Ð{transaction.fee}
@@ -154,7 +154,7 @@ export function ClientTransaction({
         rawTx={transaction.rawTx}
         addressIndex={connectedAddressIndex}
         recipientAddress={recipientAddress}
-        dogeAmount={dogeAmount}
+        pepeAmount={pepeAmount}
         handleResponse={handleResponse}
         origin={origin}
       />
@@ -169,7 +169,7 @@ const ConfirmationModal = ({
   addressIndex,
   handleResponse,
   recipientAddress,
-  dogeAmount,
+  pepeAmount,
   origin,
 }) => {
   const cancelRef = useRef();
@@ -222,7 +222,7 @@ const ConfirmationModal = ({
             <VStack alignItems='center'>
               <Text>
                 Confirm transaction to send{' '}
-                <Text fontWeight='bold'>Ð{dogeAmount}</Text> to{' '}
+                <Text fontWeight='bold'>Ð{pepeAmount}</Text> to{' '}
               </Text>
               <Text
                 fontSize='10px'

@@ -52,7 +52,7 @@ export const Password = () => {
         />
         <Box>
           <Text fontSize='3xl' textAlign='center'>
-            Unlock your <Text fontWeight='bold'>Doge</Text>
+            Unlock your <Text fontWeight='bold'>Pepe</Text>
           </Text>
           <Text color='gray.500' fontSize='14px' textAlign='center'>
             Enter password to access your wallet

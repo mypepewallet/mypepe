@@ -6,7 +6,7 @@ import {
   getTransactionsKey,
 } from '../../dataFetchers/getTransactions';
 import { useCachedInscriptionTxs } from '../../hooks/useCachedInscriptionTxs';
-import { mydoge } from '../../scripts/api';
+import { mypepe } from '../../scripts/api';
 import {
   NFT_PAGE_SIZE,
   TRANSACTION_PAGE_SIZE,
@@ -78,7 +78,7 @@ export const useTransactions = ({ wallet, selectedAddressIndex, navigate }) => {
     async ({ currentNFTs = [], cursor } = {}) => {
       setNFTsLoading(true);
       try {
-        const res = (await mydoge.get(`/api/v1/tokens/collections/${walletAddress}`)).data;
+        const res = (await mypepe.get(`/api/v1/tokens/collections/${walletAddress}`)).data;
 
         setNFTs(
           [...currentNFTs, ...(res.list ?? [])].sort(
@@ -103,8 +103,8 @@ export const useTransactions = ({ wallet, selectedAddressIndex, navigate }) => {
     async ({ cursor, currentTokens = [] } = {}) => {
       setTokensLoading(true);
       try {
-        const drc20res = (await mydoge.get(`/api/v1/tokens/drc20/${walletAddress}`)).data;
-        const dunes20res = (await mydoge.get(`/api/v1/tokens/dunes/${walletAddress}`)).data;
+        const drc20res = (await mypepe.get(`/api/v1/tokens/drc20/${walletAddress}`)).data;
+        const dunes20res = (await mypepe.get(`/api/v1/tokens/dunes/${walletAddress}`)).data;
 
         setTokens(
           [

@@ -92,7 +92,7 @@ const DeleteWallet = () => {
           <AlertDialog.Body>
             This will delete your current wallet and Seed Phrase from this
             device. Make sure you have your Seed Phrase backed up or you will
-            lose access to your Dogecoin!
+            lose access to your Pepecoin!
           </AlertDialog.Body>
           <AlertDialog.Footer>
             <Button.Group space={2}>
@@ -156,7 +156,7 @@ const BackupWallet = () => {
               <AlertDialog.Body>
                 <Text>
                   If you ever change browsers or move computers, you will need
-                  this Seed Phrase to access your Dogecoin.{'\n\n'}
+                  this Seed Phrase to access your Pepecoin.{'\n\n'}
                   <Text fontWeight='semibold'>Enter password to continue.</Text>
                 </Text>
                 <Box pt='20px'>{renderPasswordInput()}</Box>

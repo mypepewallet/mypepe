@@ -21,16 +21,16 @@ const createResponseHandler =
   };
 
 /**
- * Class representing the MyDoge API to interact with the Dogecoin wallet.
+ * Class representing the MyPepe API to interact with the Pepecoin wallet.
  */
-class MyDogeWallet {
+class MyPepeWallet {
   #requestQueue = [];
 
   #isRequestPending = false;
 
   constructor() {
-    this.isMyDoge = true;
-    console.info('MyDoge API initialized');
+    this.isMyPepe = true;
+    console.info('MyPepe API initialized');
   }
 
   #createPopupRequestHandler({ requestType, responseType, isDataValid }) {
@@ -303,12 +303,12 @@ class MyDogeWallet {
   }
 
   /**
-   * Requests a Dogecoin transaction based on the specified data.
+   * Requests a Pepecoin transaction based on the specified data.
    * @function
    * @async
-   * @param {Object} data - Data needed for the transaction, must contain 'recipientAddress' and 'dogeAmount'.
+   * @param {Object} data - Data needed for the transaction, must contain 'recipientAddress' and 'pepeAmount'.
    * @param {string} data.recipientAddress - The recipient address.
-   * @param {number} data.dogeAmount - The amount of Dogecoin to send.
+   * @param {number} data.pepeAmount - The amount of Pepecoin to send.
    * @param {function({ txId: string }): void} [onSuccess] - Optional callback function to execute upon successful transaction request.
    *                                                           Receives an object containing the transaction ID.
    * @param {function(string): void} [onError] - Optional callback function to execute upon error in processing the transaction request.
@@ -316,7 +316,7 @@ class MyDogeWallet {
    * @method
    * @example
    * requestTransaction(
-   *   { recipientAddress: 'DAHkCF5LajV6jYyi5o4eMvtpqXRcm9eZYq', dogeAmount: 100 },
+   *   { recipientAddress: 'DAHkCF5LajV6jYyi5o4eMvtpqXRcm9eZYq', pepeAmount: 100 },
    *   (result) => console.log(`Transaction ID: ${result.txId}`),
    *   (error) => console.error(`Transaction request failed: ${error}`)
    * ).then(result => console.log(result.txId))
@@ -326,7 +326,7 @@ class MyDogeWallet {
     return this.#createPopupRequestHandler({
       requestType: MESSAGE_TYPES.CLIENT_REQUEST_TRANSACTION,
       responseType: MESSAGE_TYPES.CLIENT_REQUEST_TRANSACTION_RESPONSE,
-      isDataValid: data?.recipientAddress && data?.dogeAmount,
+      isDataValid: data?.recipientAddress && data?.pepeAmount,
     })({ data, onSuccess, onError });
   }
 
@@ -395,7 +395,7 @@ class MyDogeWallet {
    * @param {Object} data - Data required for the transaction, must contain 'ticker' and 'amount'.
    * @param {string} data.ticker - The ticker symbol for the Dunes token.
    * @param {string} data.amount - The amount of Dunes tokens to make available.
-   * @param {string} data.recipientAddress - The Dogecoin address of the recipient.
+   * @param {string} data.recipientAddress - The Pepecoin address of the recipient.
    * @param {function({ txId: string, ticker: string, amount: number }): void} [onSuccess] - Optional callback function to execute upon successful transaction request.
    *
    * Receives an object containing the transaction ID, ticker symbol, and amount.
@@ -583,10 +583,10 @@ class MyDogeWallet {
    * @async
    * @param {Object} data - Data required for the query, must contain 'txId'.
    * @param {string} data.txId - The transaction ID to query.
-   * @param {function({ txId: string, confirmations: number, status: string, dogeAmount: number, blockTime: number, address: string }): void} [onSuccess] - Optional callback function to execute upon successfully retrieving the status.
+   * @param {function({ txId: string, confirmations: number, status: string, pepeAmount: number, blockTime: number, address: string }): void} [onSuccess] - Optional callback function to execute upon successfully retrieving the status.
    *                                                           Receives an object containing the number of txId, confirmations, status, amount, blockTime and address for the given tx.
    * @param {function(string): void} [onError] - Optional callback function to execute upon error in retrieving the tx status.
-   * @returns {Promise<{ txId: string, confirmations: number, status: string, dogeAmount: number, blockTime: number, address: string }>} Promise object representing the outcome of the tx retrieval, resolving to an object with the txId, confirmations, status, amount, blockTime and address for the given tx.
+   * @returns {Promise<{ txId: string, confirmations: number, status: string, pepeAmount: number, blockTime: number, address: string }>} Promise object representing the outcome of the tx retrieval, resolving to an object with the txId, confirmations, status, amount, blockTime and address for the given tx.
    * @method
    * @example
    * getTransactionStatus(
@@ -620,10 +620,10 @@ class MyDogeWallet {
 }
 
 // API we expose to allow websites to detect & interact with extension
-const doge = new MyDogeWallet();
+const pepe = new MyPepeWallet();
 
 window.addEventListener('load', () => {
-  window.doge = doge;
-  window.dispatchEvent(new Event('doge#initialized'));
-  console.info('MyDoge API dispatched to window object');
+  window.pepe = pepe;
+  window.dispatchEvent(new Event('pepe#initialized'));
+  console.info('MyPepe API dispatched to window object');
 });

@@ -17,7 +17,7 @@ import { BigButton } from '../../components/Button';
 import { ToastRender } from '../../components/ToastRender';
 import { MESSAGE_TYPES } from '../../scripts/helpers/constants';
 import { sendMessage } from '../../scripts/helpers/message';
-import { sanitizeDogeInput } from '../../utils/formatters';
+import { sanitizePepeInput } from '../../utils/formatters';
 
 const MAX_CHARACTERS = 10000;
 
@@ -44,23 +44,23 @@ export const InscribeTokenAmount = ({
       }
 
       setErrors({ ...errors, tokenAmount: '' });
-      const cleanText = parseFloat(sanitizeDogeInput(text || '0')).toFixed(0);
+      const cleanText = parseFloat(sanitizePepeInput(text || '0')).toFixed(0);
 
       if (cleanText.length > MAX_CHARACTERS) {
         return;
       }
 
-      const dogeAmount = (
-        parseFloat(cleanText) * selectedToken.dogePrice
+      const pepeAmount = (
+        parseFloat(cleanText) * selectedToken.pepePrice
       ).toFixed(8);
 
       setFormData({
         ...formData,
-        dogeAmount,
+        pepeAmount,
         tokenAmount: cleanText,
       });
     },
-    [selectedToken.dogePrice, errors, formData, setErrors, setFormData]
+    [selectedToken.pepePrice, errors, formData, setErrors, setFormData]
   );
 
   const onSetMax = useCallback(() => {

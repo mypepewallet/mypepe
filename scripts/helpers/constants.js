@@ -1,17 +1,17 @@
-export const PASSWORD = '@mydoge_PASSWORD';
-export const WALLET = '@mydoge_WALLET';
-export const ONBOARDING_COMPLETE = '@mydoge_ONBOARDING_COMPLETE';
-export const SELECTED_ADDRESS_INDEX = '@mydoge_SELECTED_ADDRESS_INDEX';
-export const CONNECTED_CLIENTS = '@mydoge_CONNECTED_CLIENTS';
-export const AUTHENTICATED = '@mydoge_AUTHENTICATED';
+export const PASSWORD = '@mypepe_PASSWORD';
+export const WALLET = '@mypepe_WALLET';
+export const ONBOARDING_COMPLETE = '@mypepe_ONBOARDING_COMPLETE';
+export const SELECTED_ADDRESS_INDEX = '@mypepe_SELECTED_ADDRESS_INDEX';
+export const CONNECTED_CLIENTS = '@mypepe_CONNECTED_CLIENTS';
+export const AUTHENTICATED = '@mypepe_AUTHENTICATED';
 export const MAX_NICKNAME_LENGTH = 18;
 export const FEE_RATE_KB = 0.5;
 export const MAX_UTXOS = 1000;
 export const MIN_TX_AMOUNT = 0.001;
 export const NFT_PAGE_SIZE = 500;
-export const QUERY_CACHE = '@mydoge_QUERY_CACHE';
-export const INSCRIPTION_TXS_CACHE = '@mydoge_INSCRIPTION_TXS_CACHE';
-export const SPENT_UTXOS_CACHE = '@mydoge_SPENT_UTXOS_CACHE';
+export const QUERY_CACHE = '@mypepe_QUERY_CACHE';
+export const INSCRIPTION_TXS_CACHE = '@mypepe_INSCRIPTION_TXS_CACHE';
+export const SPENT_UTXOS_CACHE = '@mypepe_SPENT_UTXOS_CACHE';
 /**
  * Whitelist of supported signature hash types:
  * - 1 (0x01): SIGHASH_ALL - Signs all inputs and outputs
@@ -138,7 +138,7 @@ export const MESSAGE_TYPES = {
   DELETE_WALLET: 'deleteWallet',
   GENERATE_ADDRESS: 'generateAddress',
   DELETE_ADDRESS: 'deleteAddress',
-  GET_DOGECOIN_PRICE: 'getDogecoinPrice',
+  GET_PEPECOIN_PRICE: 'getPepecoinPrice',
   GET_ADDRESS_BALANCE: 'getAddressBalance',
   GET_TRANSACTIONS: 'getTransactions',
   GET_TRANSACTION_DETAILS: 'getTransactionDetails',
@@ -158,11 +158,11 @@ export const MESSAGE_TYPES = {
   NOTIFY_TRANSACTION_SUCCESS: 'notifyTransactionSuccess',
 };
 
-// export const MYDOGE_BASE_URL = 'https://api.mydoge.com'; 
-export const MYDOGE_BASE_URL = 'http://localhost:20000';
+// export const MYPEPE_BASE_URL = 'https://api.mypepe.com'; 
+export const MYPEPE_BASE_URL = 'http://localhost:20000';
 
 
 export const DOGGY_ICON_URL = 'https://doggy.market/drc-20';
 export const DOGGY_API_ICON_URL_2 = 'https://api.doggy.market/static/drc-20';
-export const DRC20_ICON_URL = 'https://drc-20-icons.dogeord.io';
+export const DRC20_ICON_URL = 'https://drc-20-icons.pepeord.io';
 export const DUNES_ICON_URL = 'https://dune-icons.sdoggs.exchange';

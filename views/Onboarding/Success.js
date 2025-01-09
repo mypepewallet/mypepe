@@ -20,13 +20,13 @@ export const Success = () => {
       <VStack px='15%' justifyContent='center' h='100%'>
         <VStack bg='white' py='40px' rounded='sm' px='40px' mt='20px'>
           <Text fontSize='2xl'>
-            Welcome to <Text fontWeight='bold'>MyDoge</Text>
+            Welcome to <Text fontWeight='bold'>MyPepe</Text>
           </Text>
           <Image
-            source={{ uri: '/assets/such-doge.png' }}
+            source={{ uri: '/assets/such-pepe.png' }}
             size={300}
             resizeMode='contain'
-            alt='such doge'
+            alt='such pepe'
             h='200px'
             mt='30px'
             alignSelf='center'

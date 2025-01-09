@@ -60,7 +60,7 @@ export const WalletRestore = ({
           if (wordList.indexOf(word) === -1 && word !== '') {
             setErrors({
               ...errors,
-              seedPhrase: `'${word}' is not a MyDoge seed phrase word`,
+              seedPhrase: `'${word}' is not a MyPepe seed phrase word`,
             });
             noErrors = false;
           }

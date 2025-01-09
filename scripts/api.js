@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-import { MYDOGE_BASE_URL } from './helpers/constants';
+import { MYPEPE_BASE_URL } from './helpers/constants';
 
-export const mydoge = axios.create({
-  baseURL: MYDOGE_BASE_URL,
+export const mypepe = axios.create({
+  baseURL: MYPEPE_BASE_URL,
 });

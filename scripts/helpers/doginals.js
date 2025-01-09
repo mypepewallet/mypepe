@@ -7,7 +7,7 @@ import {
 } from 'bitcore-lib-doge';
 import sb from 'satoshi-bitcoin';
 
-import { mydoge } from '../api';
+import { mypepe } from '../api';
 
 const { Hash, Signature } = crypto;
 const MAX_CHUNK_LEN = 240;
@@ -266,7 +266,7 @@ export function inscribe(
 
 export async function getDRC20Inscriptions(address, ticker) {
   const query = (
-    await mydoge.get(
+    await mypepe.get(
       `/api/v1/tokens/inscriptions/${address}?ticker=${encodeURIComponent(
         ticker
       )}`
@@ -278,7 +278,7 @@ export async function getDRC20Inscriptions(address, ticker) {
 
 export async function getDRC20Balances(address, ticker) {
   const result = (
-    await mydoge.get(`/api/v1/tokens/drc20/${address}${ticker ? `?ticker=${ticker}` : ''}`)
+    await mypepe.get(`/api/v1/tokens/drc20/${address}${ticker ? `?ticker=${ticker}` : ''}`)
   ).data;
 
   return result.balances;
@@ -286,7 +286,7 @@ export async function getDRC20Balances(address, ticker) {
 
 export async function getDunesBalances(address, ticker) {
   const result = (
-    await mydoge.get(`/api/v1/tokens/dunes/${address}${ticker ? `?ticker=${ticker}` : ''}`)
+    await mypepe.get(`/api/v1/tokens/dunes/${address}${ticker ? `?ticker=${ticker}` : ''}`)
   ).data;
 
   return result.balances;
@@ -294,7 +294,7 @@ export async function getDunesBalances(address, ticker) {
 
 async function getUtxos(address, cursor, result, filter, tx = null) {
   const query = (
-    await mydoge.get(
+    await mypepe.get(
       `/api/v1/wallet/address/${address}/utxos?filter=${filter}${cursor ? `&cursor=${cursor}` : ''}`
     )
   ).data;

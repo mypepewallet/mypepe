@@ -85,14 +85,14 @@ export const WalletDetailModal = ({
               <QRCode
                 value={address}
                 size={200}
-                avatarSource={{ uri: '/assets/dogecoin-logo-300.png' }}
+                avatarSource={{ uri: '/assets/pepecoin-logo-300.png' }}
               />
               <Image
-                source={{ uri: '/assets/mydoge-logo.svg' }}
+                source={{ uri: '/assets/mypepe-logo.svg' }}
                 w={120}
                 h='32px'
                 resizeMode='contain'
-                alt='mydoge'
+                alt='mypepe'
                 bg='white'
                 ml='auto'
                 mr='auto'

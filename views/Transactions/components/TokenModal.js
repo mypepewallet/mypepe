@@ -14,11 +14,11 @@ import { BsInfoCircleFill } from 'react-icons/bs';
 
 import { BigButton } from '../../../components/Button';
 import { useAppContext } from '../../../hooks/useAppContext';
-import { mydoge } from '../../../scripts/api';
+import { mypepe } from '../../../scripts/api';
 import { logError } from '../../../utils/error';
 import {
   formatCompactNumber,
-  formatSatoshisAsDoge,
+  formatSatoshisAsPepe,
 } from '../../../utils/formatters';
 import { TokenIcon } from './TokenIcon';
 
@@ -39,7 +39,7 @@ export const TokenModal = ({ isOpen, onClose, token }) => {
   const tBalance = protocol === 'drc20' ? transferableBalance : overallBalance;
 
   const fetchTokenDetails = useCallback(() => {
-    mydoge.get(`/api/v1/tokens/${protocol}/data/${ticker}`)
+    mypepe.get(`/api/v1/tokens/${protocol}/data/${ticker}`)
       .then((res) => {
         setTokenDetails(res.data);
       })
@@ -56,8 +56,8 @@ export const TokenModal = ({ isOpen, onClose, token }) => {
     navigate(
       `/InscribeToken/?selectedToken=${JSON.stringify({
         ...token,
-        dogePrice: Number(
-          formatSatoshisAsDoge(tokenDetails?.floorPrice || 0, 2)
+        pepePrice: Number(
+          formatSatoshisAsPepe(tokenDetails?.floorPrice || 0, 2)
         ),
       })}`
     );
@@ -67,8 +67,8 @@ export const TokenModal = ({ isOpen, onClose, token }) => {
     navigate(
       `/TransferToken/?selectedToken=${JSON.stringify({
         ...token,
-        dogePrice: Number(
-          formatSatoshisAsDoge(tokenDetails?.floorPrice || 0, 2)
+        pepePrice: Number(
+          formatSatoshisAsPepe(tokenDetails?.floorPrice || 0, 2)
         ),
       })}`
     );
@@ -123,7 +123,7 @@ export const TokenModal = ({ isOpen, onClose, token }) => {
               >
                 <Pill
                   label='Price'
-                  value={`Ɖ ${formatSatoshisAsDoge(
+                  value={`Ɖ ${formatSatoshisAsPepe(
                     tokenDetails.floorPrice,
                     2
                   )}`}
@@ -267,7 +267,7 @@ export const TokenModal = ({ isOpen, onClose, token }) => {
                       <Text fontSize='13px'>
                         Initiate the first step of transferring your{' '}
                         <Text fontWeight='bold'>{ticker}</Text> tokens. This
-                        inscribes the token transfer intent on the Dogecoin
+                        inscribes the token transfer intent on the Pepecoin
                         blockchain, making the inscribed amount of{' '}
                         <Text fontWeight='bold'>{ticker}</Text> available for
                         transfer.

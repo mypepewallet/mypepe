@@ -7,7 +7,7 @@ import { ClientPopupLoading } from '../../components/ClientPopupLoading';
 import { OriginBadge } from '../../components/OriginBadge';
 import { RecipientAddress } from '../../components/RecipientAddress';
 import { WalletAddress } from '../../components/WalletAddress';
-import { mydoge } from '../../scripts/api';
+import { mypepe } from '../../scripts/api';
 import {
   MESSAGE_TYPES,
   TRANSACTION_TYPES,
@@ -80,7 +80,7 @@ export function ClientDoginalTransaction({
         return;
       }
 
-      const meta = await mydoge.get(
+      const meta = await mypepe.get(
         `/api/v1/tokens/inscription/${inscription.inscription_id}`
       );
 
@@ -185,7 +185,7 @@ export function ClientDoginalTransaction({
         rawTx={transaction.rawTx}
         addressIndex={connectedAddressIndex}
         recipientAddress={recipientAddress}
-        dogeAmount={transaction.amount}
+        pepeAmount={transaction.amount}
         handleResponse={handleResponse}
         origin={origin}
       />
@@ -200,7 +200,7 @@ const ConfirmationModal = ({
   rawTx,
   addressIndex,
   recipientAddress,
-  dogeAmount,
+  pepeAmount,
   handleResponse,
 }) => {
   const cancelRef = useRef();
@@ -257,7 +257,7 @@ const ConfirmationModal = ({
             <VStack alignItems='center'>
               <Text>
                 Confirm transaction to send{' '}
-                <Text fontWeight='bold'>Ð{dogeAmount}</Text> to{' '}
+                <Text fontWeight='bold'>Ð{pepeAmount}</Text> to{' '}
               </Text>
               <Text fontSize='10px' fontWeight='bold'>
                 {recipientAddress}

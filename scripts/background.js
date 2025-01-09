@@ -1,7 +1,7 @@
 import sb from 'satoshi-bitcoin';
 
 import { logError } from '../utils/error';
-import { mydoge } from './api';
+import { mypepe } from './api';
 import { decrypt, encrypt, hash } from './helpers/cipher';
 import {
   AUTHENTICATED,
@@ -113,11 +113,11 @@ const createClientRequestHandler =
 
 // Build a raw transaction and determine fee
 async function onCreateTransaction({ data = {}, sendResponse } = {}) {
-  const amountSatoshi = sb.toSatoshi(data.dogeAmount);
+  const amountSatoshi = sb.toSatoshi(data.pepeAmount);
   const amount = sb.toBitcoin(amountSatoshi);
 
   try {
-    const response = await mydoge.post('/api/v1/transactions/prepare/send', {
+    const response = await mypepe.post('/api/v1/transactions/prepare/send', {
       sender: data.senderAddress,
       recipient: data.recipientAddress,
       amount,
@@ -144,7 +144,7 @@ async function onCreateTransaction({ data = {}, sendResponse } = {}) {
 
 async function onCreateNFTTransaction({ data = {}, sendResponse } = {}) {
   try {
-    const response = await mydoge.post('/api/v1/transactions/prepare/inscription', {
+    const response = await mypepe.post('/api/v1/transactions/prepare/inscription', {
       sender: data.address,
       recipient: data.recipientAddress,
       location: data.location,
@@ -196,7 +196,7 @@ async function onInscribeTransferTransaction({ data = {}, sendResponse } = {}) {
       method: 'estimatesmartfee',
       params: [BLOCK_CONFIRMATIONS], // confirm within x blocks
     };
-    const feeData = (await mydoge.post('/api/v1/wallet/rpc', smartfeeReq)).data;
+    const feeData = (await mypepe.post('/api/v1/wallet/rpc', smartfeeReq)).data;
     const feePerKB = sb.toSatoshi(feeData.result.feerate * 2 || FEE_RATE_KB);
 
     console.log('found feePerKB', feePerKB);
@@ -255,7 +255,7 @@ async function onInscribeTransferTransaction({ data = {}, sendResponse } = {}) {
 
 async function onCreateDunesTransaction({ data = {}, sendResponse } = {}) {
   try {
-    const response = await mydoge.post('/api/v1/transactions/prepare/dune', {
+    const response = await mypepe.post('/api/v1/transactions/prepare/dune', {
       sender: data.walletAddress,
       recipient: data.recipientAddress,
       amount: data.tokenAmount,
@@ -296,7 +296,7 @@ function onSendTransaction({ data = {}, sendResponse } = {}) {
           method: 'sendrawtransaction',
           params: [signed],
         };
-        const jsonrpcRes = (await mydoge.post('/api/v1/wallet/rpc', jsonrpcReq)).data;
+        const jsonrpcRes = (await mypepe.post('/api/v1/wallet/rpc', jsonrpcReq)).data;
 
         // Open offscreen notification page to handle transaction status notifications
         chrome.offscreen
@@ -359,7 +359,7 @@ async function onSendInscribeTransfer({ data = {}, sendResponse } = {}) {
         jsonrpcReq.params[0]
       );
 
-      const jsonrpcRes = (await mydoge.post('/api/v1/wallet/rpc', jsonrpcReq)).data;
+      const jsonrpcRes = (await mypepe.post('/api/v1/wallet/rpc', jsonrpcReq)).data;
       await cacheSignedTx(signed);
 
       results.push(jsonrpcRes.result);
@@ -445,7 +445,7 @@ async function onSendPsbt({ data = {}, sendResponse } = {}) {
 
     console.log(`sending signed psbt`, jsonrpcReq.params[0]);
 
-    const jsonrpcRes = (await mydoge.post('/api/v1/wallet/rpc', jsonrpcReq)).data;
+    const jsonrpcRes = (await mypepe.post('/api/v1/wallet/rpc', jsonrpcReq)).data;
 
     console.log(`tx id ${jsonrpcRes.result}`);
 
@@ -573,10 +573,10 @@ function onCreateWallet({ data = {}, sendResponse } = {}) {
   return true;
 }
 
-async function onGetDogecoinPrice({ sendResponse } = {}) {
+async function onGetPepecoinPrice({ sendResponse } = {}) {
   try {
     const response = (
-      await mydoge.get('/api/v1/wallet/tickers?currency=usd')
+      await mypepe.get('/api/v1/wallet/tickers?currency=usd')
     ).data;
 
     sendResponse?.(response.rates);
@@ -592,7 +592,7 @@ async function onGetAddressBalance({ data, sendResponse } = {}) {
     const balances = await Promise.all(
       addresses.map(async (address) => {
         const response = (
-          await mydoge.get(`/api/v1/wallet/address/${address}`)
+          await mypepe.get(`/api/v1/wallet/address/${address}`)
         ).data;
 
         return response.balance;
@@ -614,7 +614,7 @@ async function onGetTransactions({ data, sendResponse } = {}) {
 
   try {
     const response = (
-      await mydoge.get(`/api/v1/wallet/address/${data.address}/transactions`, {
+      await mypepe.get(`/api/v1/wallet/address/${data.address}/transactions`, {
         params: {
           page: data.page || 1,
           pageSize: TRANSACTION_PAGE_SIZE
@@ -645,7 +645,7 @@ async function onGetTransactions({ data, sendResponse } = {}) {
 async function onGetTransactionDetails({ data, sendResponse } = {}) {
   try {
     const transaction = (
-      await mydoge.get(`/api/v1/transactions/${data.txId}`)
+      await mypepe.get(`/api/v1/transactions/${data.txId}`)
     ).data;
 
     sendResponse?.(transaction);
@@ -1087,7 +1087,7 @@ function onAuthenticate({ data = {}, sendResponse } = {}) {
           return;
         }
 
-        // MIGRATE Bitcon WIF to Dogecoin WIF
+        // MIGRATE Bitcon WIF to Pepecoin WIF
         if (!fromWIF(decryptedWallet.root)) {
           const root = generateRoot(decryptedWallet.phrase);
           const numChildren = decryptedWallet.children.length;
@@ -1173,15 +1173,15 @@ async function onNotifyTransactionSuccess({ data: { txId } } = {}) {
         if (transaction?.confirmations >= TRANSACTION_CONFIRMATIONS) {
           chrome.notifications.onClicked.addListener(async (notificationId) => {
             chrome.tabs.create({
-              url: `https://sochain.com/tx/DOGE/${notificationId}`,
+              url: `https://pepeblocks.com/tx/${notificationId}`,
             });
             await chrome.notifications.clear(notificationId).catch(() => {});
           });
           chrome.notifications.create(txId, {
             type: 'basic',
             title: 'Transaction Confirmed',
-            iconUrl: '../assets/mydoge128.png',
-            message: `${sb.toBitcoin(transaction.vout[0].value)} DOGE sent to ${
+            iconUrl: '../assets/mypepe128.png',
+            message: `${sb.toBitcoin(transaction.vout[0].value)} PEPE sent to ${
               transaction.vout[0].addresses[0]
             }.`,
           });
@@ -1191,7 +1191,7 @@ async function onNotifyTransactionSuccess({ data: { txId } } = {}) {
           chrome.notifications.create({
             type: 'basic',
             title: 'Transaction Unconfirmed',
-            iconUrl: '../assets/mydoge128.png',
+            iconUrl: '../assets/mypepe128.png',
             message: `Transaction details could not be retrieved for \`${txId}\`.`,
           });
           chrome.offscreen?.closeDocument();
@@ -1261,8 +1261,8 @@ export const messageHandler = ({ message, data }, sender, sendResponse) => {
     case MESSAGE_TYPES.DELETE_ADDRESS:
       onDeleteAddress({ data, sendResponse, sender });
       break;
-    case MESSAGE_TYPES.GET_DOGECOIN_PRICE:
-      onGetDogecoinPrice({ data, sendResponse, sender });
+    case MESSAGE_TYPES.GET_PEPECOIN_PRICE:
+      onGetPepecoinPrice({ data, sendResponse, sender });
       break;
     case MESSAGE_TYPES.GET_ADDRESS_BALANCE:
       onGetAddressBalance({ data, sendResponse, sender });

@@ -33,7 +33,7 @@ export function ClientSignedMessage({
 
   const onRejectTransaction = useCallback(() => {
     handleResponse({
-      toastMessage: `MyDoge failed to authorize the signed message request to ${origin}`,
+      toastMessage: `MyPepe failed to authorize the signed message request to ${origin}`,
       toastTitle: 'Message Rejected',
       error: 'User refused signed message',
     });

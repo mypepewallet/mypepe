@@ -18,7 +18,7 @@ import { useInterval } from '../../hooks/useInterval';
 import { MESSAGE_TYPES } from '../../scripts/helpers/constants';
 import { sendMessage } from '../../scripts/helpers/message';
 import { validateTransaction } from '../../scripts/helpers/wallet';
-import { sanitizeDogeInput } from '../../utils/formatters';
+import { sanitizePepeInput } from '../../utils/formatters';
 
 const MAX_CHARACTERS = 10000;
 const REFRESH_INTERVAL = 10000;
@@ -33,20 +33,20 @@ export const AmountScreen = ({
   selectedAddressIndex,
 }) => {
   const [isCurrencySwapped, setIsCurrencySwapped] = useState(false);
-  const [dogecoinPrice, setDogecoinPrice] = useState(0);
+  const [pepecoinPrice, setPepecoinPrice] = useState(0);
   const [addressBalance, setAddressBalance] = useState();
-  const dogeInputRef = useRef(null);
+  const pepeInputRef = useRef(null);
   const fiatInputRef = useRef(null);
   const [loading, setLoading] = useState(false);
 
-  const getDogecoinPrice = useCallback(() => {
-    sendMessage({ message: MESSAGE_TYPES.GET_DOGECOIN_PRICE }, ({ usd }) => {
+  const getPepecoinPrice = useCallback(() => {
+    sendMessage({ message: MESSAGE_TYPES.GET_PEPECOIN_PRICE }, ({ usd }) => {
       if (usd) {
-        setDogecoinPrice(usd);
-        onChangeTextDoge(formData.dogeAmount);
+        setPepecoinPrice(usd);
+        onChangeTextPepe(formData.pepeAmount);
       }
     });
-  }, [formData.dogeAmount, onChangeTextDoge]);
+  }, [formData.pepeAmount, onChangeTextPepe]);
 
   useEffect(() => {
     getAddressBalance();
@@ -68,41 +68,41 @@ export const AmountScreen = ({
 
   useInterval(
     () => {
-      getDogecoinPrice();
+      getPepecoinPrice();
       getAddressBalance();
     },
     REFRESH_INTERVAL,
     true
   );
 
-  const onChangeTextDoge = useCallback(
+  const onChangeTextPepe = useCallback(
     (text) => {
       if (Number.isNaN(Number(text))) {
         return;
       }
 
-      setErrors({ ...errors, dogeAmount: '' });
+      setErrors({ ...errors, pepeAmount: '' });
 
-      const cleanText = sanitizeDogeInput(text) || '0';
+      const cleanText = sanitizePepeInput(text) || '0';
 
       if (cleanText.length > MAX_CHARACTERS) {
         return;
       }
 
-      const cleanDoge = parseFloat(cleanText);
+      const cleanPepe = parseFloat(cleanText);
       let newFiatValue = 0;
 
-      if (cleanDoge > 0) {
-        newFiatValue = (cleanDoge * dogecoinPrice).toFixed(2);
+      if (cleanPepe > 0) {
+        newFiatValue = (cleanPepe * pepecoinPrice).toFixed(2);
       }
 
       setFormData({
         ...formData,
-        dogeAmount: cleanText,
+        pepeAmount: cleanText,
         fiatAmount: String(newFiatValue),
       });
     },
-    [dogecoinPrice, errors, formData, setErrors, setFormData]
+    [pepecoinPrice, errors, formData, setErrors, setFormData]
   );
 
   const onChangeTextFiat = useCallback(
@@ -113,26 +113,26 @@ export const AmountScreen = ({
 
       setErrors({ ...errors, fiatAmount: '' });
 
-      const cleanText = sanitizeDogeInput(text, 2) || '0';
+      const cleanText = sanitizePepeInput(text, 2) || '0';
 
       if (cleanText.length > MAX_CHARACTERS) {
         return;
       }
 
       const cleanFiat = parseFloat(cleanText);
-      let newDogeValue = 0;
+      let newPepeValue = 0;
 
       if (cleanFiat > 0) {
-        newDogeValue = (cleanFiat / dogecoinPrice).toFixed(8);
+        newPepeValue = (cleanFiat / pepecoinPrice).toFixed(8);
       }
 
       setFormData({
         ...formData,
         fiatAmount: cleanText, // This keeps the exact entered format
-        dogeAmount: String(newDogeValue),
+        pepeAmount: String(newPepeValue),
       });
     },
-    [dogecoinPrice, errors, formData, setErrors, setFormData]
+    [pepecoinPrice, errors, formData, setErrors, setFormData]
   );
 
   const swapInput = useCallback(() => {
@@ -140,22 +140,22 @@ export const AmountScreen = ({
   }, []);
 
   const onSetMax = useCallback(() => {
-    onChangeTextDoge(String(sb.toBitcoin(addressBalance)));
-  }, [addressBalance, onChangeTextDoge]);
+    onChangeTextPepe(String(sb.toBitcoin(addressBalance)));
+  }, [addressBalance, onChangeTextPepe]);
 
   const onSubmit = useCallback(() => {
     setLoading(true);
     const txData = {
       senderAddress: walletAddress,
       recipientAddress: formData.address?.trim(),
-      dogeAmount: formData.dogeAmount,
+      pepeAmount: formData.pepeAmount,
     };
     const error = validateTransaction({
       ...txData,
       addressBalance,
     });
     if (error) {
-      setErrors({ ...errors, dogeAmount: error });
+      setErrors({ ...errors, pepeAmount: error });
       setLoading(false);
     } else {
       sendMessage(
@@ -169,7 +169,7 @@ export const AmountScreen = ({
               ...formData,
               rawTx,
               fee,
-              dogeAmount: amount,
+              pepeAmount: amount,
             });
             setFormPage('confirmation');
             setLoading(false);
@@ -239,7 +239,7 @@ export const AmountScreen = ({
         {!isCurrencySwapped ? (
           <Input
             keyboardType='numeric'
-            // isDisabled={dogecoinPrice === 0}
+            // isDisabled={pepecoinPrice === 0}
             variant='filled'
             placeholder='0'
             focusOutlineColor='brandYellow.500'
@@ -253,8 +253,8 @@ export const AmountScreen = ({
                 borderColor: 'red.500',
               },
             }}
-            isInvalid={errors.dogeAmount}
-            onChangeText={onChangeTextDoge}
+            isInvalid={errors.pepeAmount}
+            onChangeText={onChangeTextPepe}
             onSubmitEditing={onSubmit}
             autoFocus
             type='number'
@@ -271,8 +271,8 @@ export const AmountScreen = ({
               </Text>
             }
             textAlign='center'
-            ref={dogeInputRef}
-            value={formData.dogeAmount}
+            ref={pepeInputRef}
+            value={formData.pepeAmount}
             position='absolute'
             top={0}
           />
@@ -292,7 +292,7 @@ export const AmountScreen = ({
                 borderColor: 'red.500',
               },
             }}
-            isInvalid={errors.dogeAmount}
+            isInvalid={errors.pepeAmount}
             onChangeText={onChangeTextFiat}
             onSubmitEditing={onSubmit}
             autoFocus
@@ -321,7 +321,7 @@ export const AmountScreen = ({
       </Box>
 
       <Text fontSize='10px' color='red.500'>
-        {errors.dogeAmount || ' '}
+        {errors.pepeAmount || ' '}
       </Text>
       <BigButton
         variant='secondary'
@@ -337,7 +337,7 @@ export const AmountScreen = ({
       <Text fontSize='20px' fontWeight='semibold' color='gray.500' pt='6px'>
         {!isCurrencySwapped ? '$' : 'Ð'}
         {isCurrencySwapped
-          ? formData.dogeAmount || 0
+          ? formData.pepeAmount || 0
           : formData.fiatAmount || 0}
       </Text>
       <HStack alignItems='center' pt='12px' space='8px'>
@@ -371,7 +371,7 @@ export const AmountScreen = ({
           role='button'
           px='28px'
           isDisabled={
-            !Number(formData.dogeAmount) || !addressBalance || errors.dogeAmount
+            !Number(formData.pepeAmount) || !addressBalance || errors.pepeAmount
           }
           loading={loading}
         >

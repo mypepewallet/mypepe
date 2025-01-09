@@ -7,13 +7,13 @@ function getLocaleDecimalSeparator() {
 }
 
 /**
- * Sanitize user input for DOGE amounts
+ * Sanitize user input for PEPE amounts
  * Removes leading zeros, errant decimals, invalid characters
  * Understands commas as decimals depending on user locale
  * @param {string} value
  * @returns {string}
  */
-export function sanitizeDogeInput(value = '', decimals = 8) {
+export function sanitizePepeInput(value = '', decimals = 8) {
   const { decimalSeparator = '.' } = getLocaleDecimalSeparator(); // Retrieve locale-specific decimal separator
   let decimalCount = 0; // Tracks the number of decimal separators
 
@@ -133,18 +133,18 @@ export function sanitizeFiat(value = '', decimals = 2) {
 }
 
 /**
- * Format satoshi values for display (convert to whole doge, can specify max decimals)
+ * Format satoshi values for display (convert to whole pepe, can specify max decimals)
  * Also uses the decimal separator that matches user's locale
  * @param {string} value
  * @param {integer} [maxDecimals]
  * @returns {string}
  */
-export function formatSatoshisAsDoge(value, maxDecimals) {
+export function formatSatoshisAsPepe(value, maxDecimals) {
   if (value >= 1) {
     const newValue = sb.toBitcoin(Math.floor(value));
-    return formatDoge(newValue, maxDecimals);
+    return formatPepe(newValue, maxDecimals);
   } else {
-    return formatDoge(value / 1e8, 10);
+    return formatPepe(value / 1e8, 10);
   }
 }
 
@@ -170,7 +170,7 @@ export const formatCompactNumber = (num, decimals = 1) => {
   })} ${suffixes[exp]}`;
 };
 
-export function formatDoge(value, maxDecimals, useGrouping) {
+export function formatPepe(value, maxDecimals, useGrouping) {
   let newValue = value;
   const opts = {};
   if (maxDecimals !== undefined) {
@@ -188,7 +188,7 @@ export function formatDoge(value, maxDecimals, useGrouping) {
 }
 
 // Should we show special 420 effect for this value?
-// (Expects value to have been formatted via formatSatoshisAsDoge/sanitizeDogeInput)
+// (Expects value to have been formatted via formatSatoshisAsPepe/sanitizePepeInput)
 export function is420(value = '', useDecimal = false) {
   const strValue = String(value); // just in case
   const { decimalSeparator = '.' } = useDecimal
@@ -208,7 +208,7 @@ export function is420(value = '', useDecimal = false) {
 }
 
 // Should we show special 69 effect for this value?
-// (Expects value to have been formatted via formatSatoshisAsDoge/sanitizeDogeInput)
+// (Expects value to have been formatted via formatSatoshisAsPepe/sanitizePepeInput)
 export function is69(value = '', useDecimal = false) {
   const strValue = String(value); // just in case
   const { decimalSeparator = '.' } = useDecimal

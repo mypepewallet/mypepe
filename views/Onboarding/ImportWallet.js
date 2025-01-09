@@ -47,7 +47,7 @@ export const ImportWallet = () => {
             Import <Text fontWeight='bold'>Wallet</Text>
           </Text>
           <Text color='gray.500' fontSize='14px'>
-            Enter your secret seed phrase to import your wallet into MyDoge
+            Enter your secret seed phrase to import your wallet into MyPepe
           </Text>
           <WalletRestore
             confirmBefore={false}

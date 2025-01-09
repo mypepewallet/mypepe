@@ -1,6 +1,6 @@
 // Wrapper functions for chrome.storage.local and chrome.storage.session. Adds a wrapper for localStorage and sessionStorage in development mode.
 
-import { mydoge } from '../api';
+import { mypepe } from '../api';
 
 const dev = process.env.NODE_ENV === 'development';
 
@@ -108,7 +108,7 @@ export async function getCachedTx(txid) {
 
   if (!tx || !tx.vout || tx.confirmations === 0) {
     tx = (
-      await mydoge.get(`/api/v1/transactions/${txid}`)
+      await mypepe.get(`/api/v1/transactions/${txid}`)
     ).data;
     await setLocalValue({ [txid]: tx });
   }

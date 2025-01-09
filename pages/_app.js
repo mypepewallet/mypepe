@@ -32,7 +32,7 @@ function MyApp({ Component, pageProps }) {
           <AppContextProvider>
             <NativeBaseProvider isSSR={false} theme={theme}>
               <Head>
-                <title>MyDoge</title>
+                <title>MyPepe</title>
               </Head>
               <Component {...pageProps} />
             </NativeBaseProvider>
