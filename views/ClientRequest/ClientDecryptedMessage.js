@@ -41,7 +41,7 @@ export function ClientDecryptedMessage({
 
   return (
     <>
-      <Box p='8px' bg='brandYellow.500' rounded='full' my='16px'>
+      <Box p='8px' bg='brandGreen.500' rounded='full' my='16px'>
         <FaLink />
       </Box>
       <Text fontSize='2xl'>

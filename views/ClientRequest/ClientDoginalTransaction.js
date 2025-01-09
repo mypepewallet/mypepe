@@ -138,7 +138,7 @@ export function ClientDoginalTransaction({
   return (
     <>
       <OriginBadge origin={origin} mb='4px' />
-      <Box p='8px' bg='brandYellow.500' rounded='full' my='16px'>
+      <Box p='8px' bg='brandGreen.500' rounded='full' my='16px'>
         <FaLink />
       </Box>
       <Text fontSize='2xl' pb='24px'>

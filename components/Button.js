@@ -3,9 +3,9 @@ import { Button, HStack, Spinner, Text } from 'native-base';
 const styleVariants = {
   primary: {
     button: {
-      background: 'brandYellow.500',
+      background: 'brandGreen.500',
       _hover: {
-        background: 'brandYellow.600',
+        background: 'brandGreen.600',
       },
     },
     text: {

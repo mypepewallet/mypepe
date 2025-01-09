@@ -165,12 +165,12 @@ export const WalletRestore = ({
     <VStack {...props}>
       <TextArea
         variant='filled'
-        focusOutlineColor='brandYellow.500'
+        focusOutlineColor='brandGreen.500'
         _hover={{
-          borderColor: 'brandYellow.500',
+          borderColor: 'brandGreen.500',
         }}
         _focus={{
-          borderColor: 'brandYellow.500',
+          borderColor: 'brandGreen.500',
         }}
         width='100%'
         mt='16px'
@@ -203,9 +203,9 @@ export const WalletRestore = ({
           placeholder='Enter Password'
           py='14px'
           type={showPassword ? 'text' : 'password'}
-          focusOutlineColor='brandYellow.500'
+          focusOutlineColor='brandGreen.500'
           _hover={{
-            borderColor: 'brandYellow.500',
+            borderColor: 'brandGreen.500',
           }}
           _invalid={{
             borderColor: 'red.500',
@@ -226,9 +226,9 @@ export const WalletRestore = ({
           placeholder='Enter Password'
           py='14px'
           type={showPassword ? 'text' : 'password'}
-          focusOutlineColor='brandYellow.500'
+          focusOutlineColor='brandGreen.500'
           _hover={{
-            borderColor: 'brandYellow.500',
+            borderColor: 'brandGreen.500',
           }}
           _invalid={{
             borderColor: 'red.500',

@@ -160,7 +160,7 @@ export const Header = ({
                     </Box>
                     <Avatar
                       size='30px'
-                      bg='brandYellow.500'
+                      bg='brandGreen.500'
                       _text={{ color: 'gray.800' }}
                       mr='12px'
                     >

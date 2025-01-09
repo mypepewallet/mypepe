@@ -3,7 +3,7 @@ import { FaLink } from 'react-icons/fa';
 
 import { OriginBadge } from './OriginBadge';
 
-const MypepeIcon = 'assets/mypepe-icon.svg';
+const MypepeIcon = 'assets/pepecoin-logo-300.png';
 
 export function ClientPopupLoading({ pageLoading, origin, loadingText }) {
   return (
@@ -16,7 +16,7 @@ export function ClientPopupLoading({ pageLoading, origin, loadingText }) {
         zIndex={2}
         alt='Mypepe icon'
       />
-      <Box p='8px' bg='brandYellow.500' rounded='full' my='24px'>
+      <Box p='8px' bg='brandGreen.500' rounded='full' my='24px'>
         <FaLink />
       </Box>
       <OriginBadge origin={origin} />

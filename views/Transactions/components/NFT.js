@@ -68,7 +68,7 @@ export const NFTComponent = ({ nft, index, onPress, selected }) => {
             <NFTView nft={nft} />
           </Box>
 
-          <Text fontSize='16px' fontWeight='bold' color='yellow.600' pt='10px'>
+          <Text fontSize='16px' fontWeight='bold' color='green.600' pt='10px'>
             {ticker ? `${ticker} ${amount}` : `# ${inscriptionNumber}`}
           </Text>
 

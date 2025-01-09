@@ -169,9 +169,9 @@ export const TransferDunesAmount = ({
           keyboardType='numeric'
           variant='filled'
           placeholder='0'
-          focusOutlineColor='brandYellow.500'
+          focusOutlineColor='brandGreen.500'
           _hover={{
-            borderColor: 'brandYellow.500',
+            borderColor: 'brandGreen.500',
           }}
           _invalid={{
             borderColor: 'red.500',
@@ -213,7 +213,7 @@ export const TransferDunesAmount = ({
                 trigger={(triggerProps) => {
                   return (
                     <Pressable {...triggerProps}>
-                      <BsInfoCircleFill color='#FCD436' />
+                      <BsInfoCircleFill color='#36FC5E' />
                     </Pressable>
                   );
                 }}

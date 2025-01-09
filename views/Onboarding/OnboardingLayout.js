@@ -23,7 +23,7 @@ export const OnboardingLayout = ({ children, ...props }) => {
             alt='background'
           />
           <Image
-            source={{ uri: '/assets/mypepe-logo.svg' }}
+            source={{ uri: '/assets/pepecoin-logo-300.png' }}
             size={250}
             resizeMode='contain'
             position='absolute'

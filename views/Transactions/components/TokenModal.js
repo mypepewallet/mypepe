@@ -93,7 +93,7 @@ export const TokenModal = ({ isOpen, onClose, token }) => {
               <TokenIcon
                 ticker={ticker}
                 size='md'
-                bg='brandYellow.500'
+                bg='brandGreen.500'
                 _text={{ color: 'gray.800' }}
               />
               <Text fontSize='20px' adjustFontSizeToFit fontWeight='semibold'>
@@ -123,14 +123,14 @@ export const TokenModal = ({ isOpen, onClose, token }) => {
               >
                 <Pill
                   label='Price'
-                  value={`Ɖ ${formatSatoshisAsPepe(
+                  value={`Ᵽ ${formatSatoshisAsPepe(
                     tokenDetails.floorPrice,
                     2
                   )}`}
                 />
                 <Pill
                   label='Volume (24h)'
-                  value={`Ɖ ${Number(
+                  value={`Ᵽ ${Number(
                     tokenDetails.twentyFourHourVolume
                   ).toLocaleString()}`}
                 />
@@ -165,7 +165,7 @@ export const TokenModal = ({ isOpen, onClose, token }) => {
                         trigger={(triggerProps) => {
                           return (
                             <Pressable {...triggerProps}>
-                              <BsInfoCircleFill color='#FCD436' />
+                              <BsInfoCircleFill color='#36FC5E' />
                             </Pressable>
                           );
                         }}
@@ -205,7 +205,7 @@ export const TokenModal = ({ isOpen, onClose, token }) => {
                       trigger={(triggerProps) => {
                         return (
                           <Pressable {...triggerProps}>
-                            <BsInfoCircleFill color='#FCD436' />
+                            <BsInfoCircleFill color='#36FC5E' />
                           </Pressable>
                         );
                       }}

@@ -124,9 +124,9 @@ export const CreateWallet = () => {
               placeholder='Password (10 characters minimum)'
               py='14px'
               type={showPassword ? 'text' : 'password'}
-              focusOutlineColor='brandYellow.500'
+              focusOutlineColor='brandGreen.500'
               _hover={{
-                borderColor: 'brandYellow.500',
+                borderColor: 'brandGreen.500',
               }}
               _invalid={{
                 borderColor: 'red.500',
@@ -148,9 +148,9 @@ export const CreateWallet = () => {
               placeholder='Enter Password'
               py='14px'
               type={showPassword ? 'text' : 'password'}
-              focusOutlineColor='brandYellow.500'
+              focusOutlineColor='brandGreen.500'
               _hover={{
-                borderColor: 'brandYellow.500',
+                borderColor: 'brandGreen.500',
               }}
               _invalid={{
                 borderColor: 'red.500',

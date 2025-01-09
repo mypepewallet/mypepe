@@ -1,13 +1,4 @@
-import {
-  Box,
-  Button,
-  HStack,
-  Image,
-  Input,
-  Modal,
-  Text,
-  VStack,
-} from 'native-base';
+import { Box, Button, HStack, Input, Modal, Text, VStack } from 'native-base';
 import { useCallback, useState } from 'react';
 import { FiCheck, FiCopy, FiEdit3 } from 'react-icons/fi';
 
@@ -86,22 +77,6 @@ export const WalletDetailModal = ({
                 value={address}
                 size={200}
                 avatarSource={{ uri: '/assets/pepecoin-logo-300.png' }}
-              />
-              <Image
-                source={{ uri: '/assets/mypepe-logo.svg' }}
-                w={120}
-                h='32px'
-                resizeMode='contain'
-                alt='mypepe'
-                bg='white'
-                ml='auto'
-                mr='auto'
-                position='absolute'
-                bottom='-45px'
-                left='50%'
-                style={{
-                  transform: [{ translateX: '-50%' }, { translateY: '-50%' }],
-                }}
               />
             </Box>
           </Box>
@@ -184,12 +159,12 @@ const NicknameUpdate = ({
         placeholder='Enter address name'
         variant='outline'
         w='200px'
-        focusOutlineColor='brandYellow.500'
+        focusOutlineColor='brandGreen.500'
         _hover={{
-          borderColor: 'brandYellow.500',
+          borderColor: 'brandGreen.500',
         }}
         _focus={{
-          borderColor: 'brandYellow.500',
+          borderColor: 'brandGreen.500',
         }}
         onChangeText={onChangeText}
         _invalid={{

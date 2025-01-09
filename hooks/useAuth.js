@@ -41,9 +41,9 @@ export const useAuth = ({
           placeholder='Password'
           py='14px'
           type='password'
-          focusOutlineColor='brandYellow.500'
+          focusOutlineColor='brandGreen.500'
           _hover={{
-            borderColor: 'brandYellow.500',
+            borderColor: 'brandGreen.500',
           }}
           _invalid={{
             borderColor: 'red.500',

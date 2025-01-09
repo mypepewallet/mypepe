@@ -104,12 +104,12 @@ export const CreateAddressModal = ({
             <Input
               placeholder='Enter address nickname'
               variant='filled'
-              focusOutlineColor='brandYellow.500'
+              focusOutlineColor='brandGreen.500'
               _hover={{
-                borderColor: 'brandYellow.500',
+                borderColor: 'brandGreen.500',
               }}
               _focus={{
-                borderColor: 'brandYellow.500',
+                borderColor: 'brandGreen.500',
               }}
               onChangeText={onChangeText}
               _invalid={{

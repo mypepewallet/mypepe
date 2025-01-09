@@ -9,7 +9,7 @@ export const Footer = ({ ...props }) => {
     <Text textAlign='center' mt='80px' color='gray.400' {...props}>
       Need help using MyPepe?{'\n'}
       <Text
-        color='brandYellow.500'
+        color='brandGreen.500'
         underline
         fontWeight='medium'
         onClickFAQ

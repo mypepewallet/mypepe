@@ -53,7 +53,7 @@ export const TransactionModal = ({
             <HStack alignItems='center' space='12px'>
               <Avatar
                 size='sm'
-                bg='brandYellow.500'
+                bg='brandGreen.500'
                 _text={{ color: 'gray.800' }}
               >
                 {address?.substring(0, 2)}
@@ -87,7 +87,7 @@ export const TransactionModal = ({
               fontWeight='semibold'
               pb='12px'
             >
-              Ɖ{formatSatoshisAsPepe(amount, 3)}
+              Ᵽ{formatSatoshisAsPepe(amount, 3)}
             </Text>
             <HStack justifyContent='center' w='100%' mb='8px'>
               <InscriptionIndicator

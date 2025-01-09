@@ -7,7 +7,7 @@ export function Stats({ usdPrice, pepeStats, ...props }) {
   return (
     <HStack justifyContent='space-between' px={6} {...props}>
       <HStack ai='center' space='12px'>
-        <HStack p='8px' bg='yellow.50' borderRadius={7}>
+        <HStack p='8px' bg='green.50' borderRadius={7}>
           <Image src={PepecoinIcon} width='24px' height='24px' alt='pepecoin' />
         </HStack>
         <Stack>
@@ -17,7 +17,7 @@ export function Stats({ usdPrice, pepeStats, ...props }) {
       </HStack>
       <Divider orientation='vertical' />
       <HStack ai='center' space='12px'>
-        <HStack p='8px' bg='yellow.50' borderRadius={7}>
+        <HStack p='8px' bg='green.50' borderRadius={7}>
           <Image src={ChartIcon} width='24px' height='24px' alt='chart' />
         </HStack>
         <HStack>

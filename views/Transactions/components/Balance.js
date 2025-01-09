@@ -10,7 +10,7 @@ import { asFiat, formatSatoshisAsPepe } from '../../../utils/formatters';
 
 const EyeDisabled = 'assets/eye-disabled.svg';
 const EyeEnabled = 'assets/eye-enabled.svg';
-const MypepeIcon = 'assets/mypepe-icon.svg';
+const MypepeIcon = 'assets/pepecoin-logo-300.png';
 
 const QUERY_INTERVAL = 10000;
 
@@ -72,7 +72,7 @@ export function Balance({ walletAddress }) {
         alt='Mypepe icon'
       />
       <VStack
-        bg='yellow.100'
+        bg='green.100'
         borderRadius={20}
         pb='14px'
         alignItems='center'
@@ -88,9 +88,9 @@ export function Balance({ walletAddress }) {
             <Text secondary fontWeight='700' color='black' fontSize='35px'>
               {!balanceVisible
                 ? typeof balance === 'number'
-                  ? `Ɖ${formatSatoshisAsPepe(balance, 3)}`
+                  ? `Ᵽ${formatSatoshisAsPepe(balance, 3)}`
                   : ' '
-                : 'Ɖ******'}
+                : 'Ᵽ******'}
             </Text>
             <HStack alignItems='center' justifyContent='center'>
               <Text secondary color='gray.500' fontWeight='500'>

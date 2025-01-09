@@ -121,7 +121,7 @@ export const ConfirmationScreen = ({
         Paying
       </Text>
       <HStack alignItems='center' space='12px' pb='28px'>
-        <Avatar size='sm' bg='brandYellow.500' _text={{ color: 'gray.800' }}>
+        <Avatar size='sm' bg='brandGreen.500' _text={{ color: 'gray.800' }}>
           {formData.address?.substring(0, 2)}
         </Avatar>
         <Text

@@ -12,7 +12,7 @@ export const RecipientAddress = ({ address = '' }) => {
           <HStack alignItems='center' space='12px'>
             <Avatar
               size='sm'
-              bg='brandYellow.500'
+              bg='brandGreen.500'
               _text={{ color: 'gray.800' }}
             >
               {address?.substring(0, 2)}

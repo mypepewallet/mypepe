@@ -67,9 +67,9 @@ export const AddressScreen = ({
         variant='filled'
         placeholder='Send to PEPE address'
         py='14px'
-        focusOutlineColor='brandYellow.500'
+        focusOutlineColor='brandGreen.500'
         _hover={{
-          borderColor: 'brandYellow.500',
+          borderColor: 'brandGreen.500',
         }}
         _invalid={{
           borderColor: 'red.500',

@@ -216,7 +216,7 @@ export const AmountScreen = ({
         Paying
       </Text>
       <HStack alignItems='center' space='12px' pb='28px'>
-        <Avatar size='sm' bg='brandYellow.500' _text={{ color: 'gray.800' }}>
+        <Avatar size='sm' bg='brandGreen.500' _text={{ color: 'gray.800' }}>
           {formData.address?.substring(0, 2)}
         </Avatar>
         <Text
@@ -242,9 +242,9 @@ export const AmountScreen = ({
             // isDisabled={pepecoinPrice === 0}
             variant='filled'
             placeholder='0'
-            focusOutlineColor='brandYellow.500'
+            focusOutlineColor='brandGreen.500'
             _hover={{
-              borderColor: 'brandYellow.500',
+              borderColor: 'brandGreen.500',
             }}
             _invalid={{
               borderColor: 'red.500',
@@ -281,9 +281,9 @@ export const AmountScreen = ({
             keyboardType='numeric'
             variant='filled'
             placeholder='0'
-            focusOutlineColor='brandYellow.500'
+            focusOutlineColor='brandGreen.500'
             _hover={{
-              borderColor: 'brandYellow.500',
+              borderColor: 'brandGreen.500',
             }}
             _invalid={{
               borderColor: 'red.500',

@@ -62,13 +62,13 @@ export const NFTModal = ({ isOpen, onClose, nft }) => {
                 position='absolute'
                 left='10px'
                 bottom='10px'
-                backgroundColor='yellow.400'
+                backgroundColor='green.400'
                 borderRadius='8px'
                 paddingX='8px'
                 paddingY='1px'
               >
                 <Text fontWeight='semibold'>
-                  Ɖ {formatSatoshisAsPepe(outputValue, 3)}
+                  Ᵽ {formatSatoshisAsPepe(outputValue, 3)}
                 </Text>
               </Box>
             </Box>
@@ -76,7 +76,7 @@ export const NFTModal = ({ isOpen, onClose, nft }) => {
               <Text
                 fontSize='18px'
                 fontWeight='bold'
-                color='yellow.600'
+                color='green.600'
                 pt='10px'
               >
                 # {inscriptionNumber}

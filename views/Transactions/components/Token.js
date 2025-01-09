@@ -54,7 +54,7 @@ export const Token = ({
           <TokenIcon
             ticker={ticker}
             size='sm'
-            bg='brandYellow.500'
+            bg='brandGreen.500'
             _text={{ color: 'gray.800' }}
             mr='12px'
           />

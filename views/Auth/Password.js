@@ -68,7 +68,7 @@ export const Password = () => {
             Unlock
           </BigButton>
           <Text
-            color='brandYellow.500'
+            color='brandGreen.500'
             underline
             fontWeight='medium'
             textAlign='center'
