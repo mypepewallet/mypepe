@@ -158,11 +158,6 @@ export const MESSAGE_TYPES = {
   NOTIFY_TRANSACTION_SUCCESS: 'notifyTransactionSuccess',
 };
 
-// export const MYPEPE_BASE_URL = 'https://api.mypepe.com'; 
-export const MYPEPE_BASE_URL = 'http://localhost:20000';
+export const MYPEPE_BASE_URL = 'https://api.mypepecoin.org';
 
-
-export const DOGGY_ICON_URL = 'https://doggy.market/drc-20';
-export const DOGGY_API_ICON_URL_2 = 'https://api.doggy.market/static/drc-20';
-export const DRC20_ICON_URL = 'https://drc-20-icons.pepeord.io';
-export const DUNES_ICON_URL = 'https://dune-icons.sdoggs.exchange';
+export const IMAGE_URL = 'https://api.mypepecoin.org/images';

@@ -1,17 +1,12 @@
 import { Avatar } from 'native-base';
 import { useEffect, useState } from 'react';
 
-import {
-  DOGGY_ICON_URL,
-  DRC20_ICON_URL,
-  // DUNES_ICON_URL,
-} from '../../../scripts/helpers/constants';
+import { IMAGE_URL } from '../../../scripts/helpers/constants';
 
 const getImageUrl = (ticker, index) => {
   const imageUrls = [
-    `${DOGGY_ICON_URL}/${ticker}.png`,
-    `${DOGGY_ICON_URL}/${ticker}.jpg`,
-    `${DRC20_ICON_URL}/${ticker}.png`,
+    `${IMAGE_URL}/${ticker}.png`,
+    `${IMAGE_URL}/${ticker}.jpg`,
   ];
   return imageUrls[index];
 };

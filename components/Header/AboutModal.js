@@ -21,49 +21,28 @@ export const AboutModal = ({ showModal, onClose }) => {
           </VStack>
           <VStack space='6px' mt='20px'>
             <Link
+              fontSize='md'
+              href='https://github.com/mypepewallet/mypepe'
               _text={{
                 fontSize: 'md',
                 color: 'blue.500',
                 fontWeight: 'semibold',
               }}
-              href='https://www.mypepe.com/terms'
-              onPress={() => onLinkClick('https://www.mypepe.com/terms')}
+              onPress={() =>
+                onLinkClick('https://github.com/mypepewallet/mypepe')
+              }
             >
-              Terms of Use
+              Visit source code
             </Link>
             <Link
               fontSize='md'
-              href='https://www.mypepe.com/privacy'
+              href='https://x.com/MyPepeWallet'
               _text={{
                 fontSize: 'md',
                 color: 'blue.500',
                 fontWeight: 'semibold',
               }}
-              onPress={() => onLinkClick('https://www.mypepe.com/privacy')}
-            >
-              Privacy Policy
-            </Link>
-            <Link
-              fontSize='md'
-              href='https://mypepe.com'
-              _text={{
-                fontSize: 'md',
-                color: 'blue.500',
-                fontWeight: 'semibold',
-              }}
-              onPress={() => onLinkClick('https://mypepe.com')}
-            >
-              Visit our website
-            </Link>
-            <Link
-              fontSize='md'
-              href='mailto:support@mypepe.com'
-              _text={{
-                fontSize: 'md',
-                color: 'blue.500',
-                fontWeight: 'semibold',
-              }}
-              onPress={() => onLinkClick('mailto:support@mypepe.com')}
+              onPress={() => onLinkClick('https://x.com/MyPepeWallet')}
             >
               Contact us
             </Link>

@@ -55,8 +55,8 @@ export function Transactions() {
     wallet.nicknames?.[activeAddress] ?? `Address ${selectedAddressIndex + 1}`;
 
   const onBuy = useCallback(() => {
-    window.open(`https://buy.getdoge.com/?addr=${activeAddress}`);
-  }, [activeAddress]);
+    window.open('https://xeggex.com/market/PEP_USDT');
+  }, []);
 
   const [routes] = useState([
     { key: 'transactions', title: 'Transactions' },
