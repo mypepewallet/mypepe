@@ -283,10 +283,10 @@ export function ClientPSBT({
         </HStack>
 
         <Text fontSize='3xl' fontWeight='semibold' pt='6px'>
-          Ð{pepeAmount}
+          Ᵽ{pepeAmount}
         </Text>
         <Text fontSize='13px' fontWeight='semibold' pt='6px'>
-          Network fee Ð{pepeFee}
+          Network fee Ᵽ{pepeFee}
         </Text>
         <HStack alignItems='center' mt='60px' space='12px'>
           <BigButton
@@ -491,7 +491,7 @@ const ConfirmationModal = ({
             <VStack alignItems='center'>
               <Text>
                 Confirm transaction to {signOnly ? 'sign' : 'send'}{' '}
-                <Text fontWeight='bold'>Ð{pepeAmount}</Text>
+                <Text fontWeight='bold'>Ᵽ{pepeAmount}</Text>
               </Text>
             </VStack>
           </AlertDialog.Body>

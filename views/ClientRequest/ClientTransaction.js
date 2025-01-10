@@ -125,10 +125,10 @@ export function ClientTransaction({
         <RecipientAddress address={recipientAddress} />
 
         <Text fontSize='3xl' fontWeight='semibold' pt='6px'>
-          Ð{pepeAmount}
+          Ᵽ{pepeAmount}
         </Text>
         <Text fontSize='13px' fontWeight='semibold' pt='6px'>
-          Network fee Ð{transaction.fee}
+          Network fee Ᵽ{transaction.fee}
         </Text>
         <HStack alignItems='center' mt='60px' space='12px'>
           <BigButton
@@ -222,7 +222,7 @@ const ConfirmationModal = ({
             <VStack alignItems='center'>
               <Text>
                 Confirm transaction to send{' '}
-                <Text fontWeight='bold'>Ð{pepeAmount}</Text> to{' '}
+                <Text fontWeight='bold'>Ᵽ{pepeAmount}</Text> to{' '}
               </Text>
               <Text
                 fontSize='10px'

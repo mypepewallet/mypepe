@@ -122,7 +122,7 @@ export function ClientConnect({ params, wallet, handleResponse }) {
                       <Text color='gray.400' fontSize='xs'>
                         {addressBalances[address] ? (
                           <>
-                            <Text fontWeight='bold'>Balance: </Text>Ð
+                            <Text fontWeight='bold'>Balance: </Text>Ᵽ
                             {sb.toBitcoin(addressBalances[address])}
                           </>
                         ) : (

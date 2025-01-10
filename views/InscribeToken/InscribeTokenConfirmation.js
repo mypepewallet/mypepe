@@ -84,7 +84,7 @@ export const InscribeTokenConfirmation = ({
         {selectedToken.ticker} {Number(formData.tokenAmount).toLocaleString()}
       </Text>
       <Text fontSize='13px' fontWeight='semibold' pt='6px'>
-        Network fee: <Text fontWeight='normal'>Ð{formData.fee}</Text>
+        Network fee: <Text fontWeight='normal'>Ᵽ{formData.fee}</Text>
       </Text>
 
       <HStack alignItems='center' mt='60px' space='12px'>

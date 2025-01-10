@@ -111,10 +111,10 @@ export const TransferDunesConfirmation = ({
       <RecipientAddress address={formData.address} />
 
       <Text fontSize='3xl' fontWeight='semibold' pt='6px'>
-        Ð{formData.pepeAmount}
+        Ᵽ{formData.pepeAmount}
       </Text>
       <Text fontSize='13px' fontWeight='semibold' pt='6px'>
-        Network fee Ð{formData.fee}
+        Network fee Ᵽ{formData.fee}
       </Text>
       <HStack alignItems='center' mt='30px' space='12px'>
         <Button

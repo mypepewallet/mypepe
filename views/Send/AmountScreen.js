@@ -267,7 +267,7 @@ export const AmountScreen = ({
             }}
             InputLeftElement={
               <Text fontSize='24px' fontWeight='semibold' px='4px'>
-                Ð
+                Ᵽ
               </Text>
             }
             textAlign='center'
@@ -335,7 +335,7 @@ export const AmountScreen = ({
         <IoSwapVerticalOutline size='22px' style={{ paddingTop: 3 }} />
       </BigButton>
       <Text fontSize='20px' fontWeight='semibold' color='gray.500' pt='6px'>
-        {!isCurrencySwapped ? '$' : 'Ð'}
+        {!isCurrencySwapped ? '$' : 'Ᵽ'}
         {isCurrencySwapped
           ? formData.pepeAmount || 0
           : formData.fiatAmount || 0}
@@ -343,7 +343,7 @@ export const AmountScreen = ({
       <HStack alignItems='center' pt='12px' space='8px'>
         {addressBalance ? (
           <Text fontSize='14px' color='gray.500'>
-            Balance: Ð{sb.toBitcoin(addressBalance)}
+            Balance: Ᵽ{sb.toBitcoin(addressBalance)}
           </Text>
         ) : null}
         <Button
