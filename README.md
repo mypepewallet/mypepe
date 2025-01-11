@@ -1,4 +1,8 @@
-# MyDoge Chrome Extension
+# MyPepe Chrome Extension
+
+- Based on MyDoge Wallet
+- Copyright MyDoge Inc. 2023. All rights reserved.
+- Modified for Pepecoin Network
 
 ## 🚀 Quick start
 
@@ -17,9 +21,3 @@
 - Install [Extensions Reloader](https://chrome.google.com/webstore/detail/extensions-reloader/fimgfedafeadlieiabdeeaodndnlbhid?hl=en) Chrome extension to enable automatic extension reload after every build.
 
 - Run `yarn watch` to build and reload the extension with every file change.
-
-## API Integration
-
-- View the [documentation](https://mydoge-com.github.io/mydogemask/)
-
-- See our [demo project](https://github.com/mydoge-com/mydogemask-next-example) for a complete example of MyDoge Wallet API functionality.
