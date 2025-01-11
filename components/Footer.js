@@ -13,11 +13,7 @@ export const Footer = ({ ...props }) => {
         underline
         fontWeight='medium'
         onClickFAQ
-        onPress={() =>
-          onLinkClick(
-            'https://intercom.help/mydoge/en/collections/3278627-mydoge-faq'
-          )
-        }
+        onPress={() => onLinkClick('https://x.com/MyPepeWallet')}
       >
         Frequently Asked Questions
       </Text>

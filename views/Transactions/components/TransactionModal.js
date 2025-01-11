@@ -25,9 +25,7 @@ export const TransactionModal = ({
   useEffect(() => {
     (async () => {
       if (isOpen) {
-        const tx = (
-          await mypepe.get(`/api/v1/transactions/${id}`)
-        ).data;
+        const tx = (await mypepe.get(`/api/v1/transactions/${id}`)).data;
         setConf(tx.confirmations);
         await setLocalValue({ [id]: tx });
       }
