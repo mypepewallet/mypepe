@@ -10,15 +10,15 @@ import { NFTView } from './NFTView';
 export const NFTComponent = ({ nft, index, onPress, selected }) => {
   const { inscriptionNumber, timestamp, amount, ticker, output } = nft ?? {};
 
-  const pendingDoginalTxs = useCachedInscriptionTxs({
+  const pendingPepinalTxs = useCachedInscriptionTxs({
     filterPending: true,
   }).filter(
     (tx) =>
-      tx.txType === TRANSACTION_TYPES.DOGINAL_TX ||
-      tx.txType === TRANSACTION_TYPES.DRC20_SEND_INSCRIPTION_TX
+      tx.txType === TRANSACTION_TYPES.PEPINAL_TX ||
+      tx.txType === TRANSACTION_TYPES.PRC20_SEND_INSCRIPTION_TX
   );
 
-  const isNFTPending = pendingDoginalTxs?.find(
+  const isNFTPending = pendingPepinalTxs?.find(
     (tx) => tx.location === nft?.location
   );
 

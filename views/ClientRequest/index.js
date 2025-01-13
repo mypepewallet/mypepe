@@ -6,11 +6,11 @@ import { ToastRender } from '../../components/ToastRender';
 import { useAppContext } from '../../hooks/useAppContext';
 import { MESSAGE_TYPES } from '../../scripts/helpers/constants';
 import { sendMessage } from '../../scripts/helpers/message';
-import { ClientAvailableDRC20Transaction } from './ClientAvailableDRC20Transaction';
+import { ClientAvailablePRC20Transaction } from './ClientAvailablePRC20Transaction';
 import { ClientConnect } from './ClientConnect';
 import { ClientDecryptedMessage } from './ClientDecryptedMessage';
-import { ClientDoginalTransaction } from './ClientDoginalTransaction';
 import { ClientDunesTransaction } from './ClientDunesTransaction';
+import { ClientPepinalTransaction } from './ClientPepinalTransaction';
 import { ClientPSBT } from './ClientPSBT';
 import { ClientSignedMessage } from './ClientSignedMessage';
 import { ClientTransaction } from './ClientTransaction';
@@ -24,13 +24,13 @@ const CLIENT_REQUEST_ROUTES = {
     component: ClientTransaction,
     response: MESSAGE_TYPES.CLIENT_REQUEST_TRANSACTION_RESPONSE,
   },
-  [MESSAGE_TYPES.CLIENT_REQUEST_DOGINAL_TRANSACTION]: {
-    component: ClientDoginalTransaction,
-    response: MESSAGE_TYPES.CLIENT_REQUEST_DOGINAL_TRANSACTION_RESPONSE,
+  [MESSAGE_TYPES.CLIENT_REQUEST_PEPINAL_TRANSACTION]: {
+    component: ClientPepinalTransaction,
+    response: MESSAGE_TYPES.CLIENT_REQUEST_PEPINAL_TRANSACTION_RESPONSE,
   },
-  [MESSAGE_TYPES.CLIENT_REQUEST_AVAILABLE_DRC20_TRANSACTION]: {
-    component: ClientAvailableDRC20Transaction,
-    response: MESSAGE_TYPES.CLIENT_REQUEST_AVAILABLE_DRC20_TRANSACTION_RESPONSE,
+  [MESSAGE_TYPES.CLIENT_REQUEST_AVAILABLE_PRC20_TRANSACTION]: {
+    component: ClientAvailablePRC20Transaction,
+    response: MESSAGE_TYPES.CLIENT_REQUEST_AVAILABLE_PRC20_TRANSACTION_RESPONSE,
   },
   [MESSAGE_TYPES.CLIENT_REQUEST_DUNES_TRANSACTION]: {
     component: ClientDunesTransaction,

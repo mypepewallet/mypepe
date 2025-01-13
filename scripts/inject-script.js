@@ -175,26 +175,26 @@ class MyPepeWallet {
   }
 
   /**
-   * Retrieves the DRC20 token balance based on provided data.
+   * Retrieves the PRC20 token balance based on provided data.
    * @function
    * @async
-   * @param {Object} data - Data required to fetch the DRC20 balance, must contain 'ticker'.
-   * @param {string} data.ticker - The ticker symbol for the DRC20 token.
+   * @param {Object} data - Data required to fetch the PRC20 balance, must contain 'ticker'.
+   * @param {string} data.ticker - The ticker symbol for the PRC20 token.
    * @param {function({ availableBalance: number, transferableBalance: number, ticker: string, address: string }): void} [onSuccess] - Optional callback function to execute upon successful retrieval.
    *                                                           Receives an object containing the available balance, transferable balance, ticker symbol, and wallet address.
    * @param {function(string): void} [onError] - Optional callback function to execute upon error in retrieving balance.
    * @returns {Promise<{ availableBalance: number, transferableBalance: number, ticker: string, address: string }>} Promise object representing the outcome of the balance retrieval, resolving to an object with the wallet address, available balance, and transferable balance.
    * @method
    * @example
-   * getDRC20Balance(
-   *   { ticker: 'DRC20' },
+   * getPRC20Balance(
+   *   { ticker: 'PRC20' },
    *   (result) => console.log(`Available balance: ${result.availableBalance}, transferable balance: ${result.transferableBalance}`),
    *   (error) => console.error(`Balance retrieval failed: ${error}`)
    * ).then(result => console.log(result.availableBalance))
    *   .catch(error => console.error(error));
    */
 
-  getDRC20Balance(data, onSuccess, onError) {
+  getPRC20Balance(data, onSuccess, onError) {
     return new Promise((resolve, reject) => {
       if (!data?.ticker) {
         onError?.(new Error('Invalid data'));
@@ -203,7 +203,7 @@ class MyPepeWallet {
       }
 
       window.postMessage(
-        { type: MESSAGE_TYPES.CLIENT_GET_DRC20_BALANCE, data },
+        { type: MESSAGE_TYPES.CLIENT_GET_PRC20_BALANCE, data },
         window.location.origin
       );
 
@@ -212,31 +212,31 @@ class MyPepeWallet {
         reject,
         onSuccess,
         onError,
-        messageType: MESSAGE_TYPES.CLIENT_GET_DRC20_BALANCE_RESPONSE,
+        messageType: MESSAGE_TYPES.CLIENT_GET_PRC20_BALANCE_RESPONSE,
       });
     });
   }
 
   /**
-   * Retrieves transferable DRC20 inscriptions based on provided data.
+   * Retrieves transferable PRC20 inscriptions based on provided data.
    * @function
    * @async
    * @param {Object} data - Data required for the query, must contain 'ticker'.
-   * @param {string} data.ticker - The ticker symbol for the DRC20 token.
+   * @param {string} data.ticker - The ticker symbol for the PRC20 token.
    * @param {function({ inscriptions: Array<{ txid: string, vout: number, ticker: string, contentType: string, content: string, location: string, amount: number }>, ticker: string, address: string }): void} [onSuccess] - Optional callback function to execute upon successful retrieval.
    *                                                           Receives an object containing the transferable inscriptions, ticker symbol, and wallet address.
    * @param {function(string): void} [onError] - Optional callback function to execute upon error in fetching the transferable balance.
    * @returns {Promise<{ inscriptions: Array<{ txid: string, vout: number, ticker: string, contentType: string, content: string, location: string, amount: number }>, ticker: string, address: string }>} Promise object representing the outcome of the balance retrieval, resolving to an object with the wallet address, transferable inscriptions, and ticker symbol.}
    * @method
    * @example
-   * getTransferableDRC20(
-   *   { ticker: 'DRC20' },*
+   * getTransferablePRC20(
+   *   { ticker: 'PRC20' },*
    *   (result) => console.log(`Transferable inscriptions: ${result.inscriptions}`),
    *   (error) => console.error(`Balance retrieval failed: ${error}`)
    * ).then(result => console.log(result.inscriptions))
    *   .catch(error => console.error(error));
    */
-  getTransferableDRC20(data, onSuccess, onError) {
+  getTransferablePRC20(data, onSuccess, onError) {
     return new Promise((resolve, reject) => {
       if (!data?.ticker) {
         onError?.(new Error('Invalid data'));
@@ -245,7 +245,7 @@ class MyPepeWallet {
       }
 
       window.postMessage(
-        { type: MESSAGE_TYPES.CLIENT_GET_TRANSFERABLE_DRC20, data },
+        { type: MESSAGE_TYPES.CLIENT_GET_TRANSFERABLE_PRC20, data },
         window.location.origin
       );
 
@@ -254,7 +254,7 @@ class MyPepeWallet {
         reject,
         onSuccess,
         onError,
-        messageType: MESSAGE_TYPES.CLIENT_GET_TRANSFERABLE_DRC20_RESPONSE,
+        messageType: MESSAGE_TYPES.CLIENT_GET_TRANSFERABLE_PRC20_RESPONSE,
       });
     });
   }
@@ -331,7 +331,7 @@ class MyPepeWallet {
   }
 
   /**
-   * Requests an inscription transaction for Doginal/DRC-20 based on the specified data.
+   * Requests an inscription transaction for Pepinal/PRC-20 based on the specified data.
    * @function
    * @async
    * @param {Object} data - Data required for the transaction, must contain 'recipientAddress' and 'output'.
@@ -352,19 +352,19 @@ class MyPepeWallet {
    */
   requestInscriptionTransaction(data, onSuccess, onError) {
     return this.#createPopupRequestHandler({
-      requestType: MESSAGE_TYPES.CLIENT_REQUEST_DOGINAL_TRANSACTION,
-      responseType: MESSAGE_TYPES.CLIENT_REQUEST_DOGINAL_TRANSACTION_RESPONSE,
+      requestType: MESSAGE_TYPES.CLIENT_REQUEST_PEPINAL_TRANSACTION,
+      responseType: MESSAGE_TYPES.CLIENT_REQUEST_PEPINAL_TRANSACTION_RESPONSE,
       isDataValid: data?.recipientAddress && data?.location,
     })({ data, onSuccess, onError });
   }
 
   /**
-   * Requests a transaction for available DRC20 tokens based on specified data.
+   * Requests a transaction for available PRC20 tokens based on specified data.
    * @function
    * @async
    * @param {Object} data - Data required for the transaction, must contain 'ticker' and 'amount'.
-   * @param {string} data.ticker - The ticker symbol for the DRC20 token.
-   * @param {string} data.amount - The amount of DRC20 tokens to make available.
+   * @param {string} data.ticker - The ticker symbol for the PRC20 token.
+   * @param {string} data.amount - The amount of PRC20 tokens to make available.
    * @param {function({ txId: string, ticker: string, amount: number }): void} [onSuccess] - Optional callback function to execute upon successful transaction request.
    *
    * Receives an object containing the transaction ID, ticker symbol, and amount.
@@ -373,17 +373,17 @@ class MyPepeWallet {
    * @method
    * @example
    * requestInscriptionTransaction(
-   *   { ticker: 'DRC20', amount: 100 },
+   *   { ticker: 'PRC20', amount: 100 },
    *   (result) => console.log(`Transaction ID: ${result.txId} `),
    *   (error) => console.error(`Transaction request failed: ${error}`)
    * ).then(result => console.log(result.txId))
    *   .catch(error => console.error(error));
    */
-  requestAvailableDRC20Transaction(data, onSuccess, onError) {
+  requestAvailablePRC20Transaction(data, onSuccess, onError) {
     return this.#createPopupRequestHandler({
-      requestType: MESSAGE_TYPES.CLIENT_REQUEST_AVAILABLE_DRC20_TRANSACTION,
+      requestType: MESSAGE_TYPES.CLIENT_REQUEST_AVAILABLE_PRC20_TRANSACTION,
       responseType:
-        MESSAGE_TYPES.CLIENT_REQUEST_AVAILABLE_DRC20_TRANSACTION_RESPONSE,
+        MESSAGE_TYPES.CLIENT_REQUEST_AVAILABLE_PRC20_TRANSACTION_RESPONSE,
       isDataValid: data?.ticker && data?.amount,
     })({ data, onSuccess, onError });
   }

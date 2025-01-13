@@ -34,7 +34,7 @@ export function TransferNFT() {
       withHeader
       p={0}
       withCancelButton
-      cancelRoute='/Transactions/doginals'
+      cancelRoute='/Transactions/pepinals'
       addressColor='black'
     >
       <Box pt='72px' px='12px'>

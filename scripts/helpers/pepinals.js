@@ -28,8 +28,8 @@ function numberToChunk(n) {
       n <= 16
         ? undefined
         : n < 128
-          ? Buffer.from([n])
-          : Buffer.from([n % 256, n / 256]),
+        ? Buffer.from([n])
+        : Buffer.from([n % 256, n / 256]),
     len: n <= 16 ? 0 : n < 128 ? 1 : 2,
     opcodenum: n === 0 ? 0 : n <= 16 ? 80 + n : n < 128 ? 1 : 2,
   };
@@ -264,7 +264,7 @@ export function inscribe(
   return txs;
 }
 
-export async function getDRC20Inscriptions(address, ticker) {
+export async function getPRC20Inscriptions(address, ticker) {
   const query = (
     await mypepe.get(
       `/api/v1/tokens/inscriptions/${address}?ticker=${encodeURIComponent(
@@ -276,9 +276,11 @@ export async function getDRC20Inscriptions(address, ticker) {
   return query.list;
 }
 
-export async function getDRC20Balances(address, ticker) {
+export async function getPRC20Balances(address, ticker) {
   const result = (
-    await mypepe.get(`/api/v1/tokens/drc20/${address}${ticker ? `?ticker=${ticker}` : ''}`)
+    await mypepe.get(
+      `/api/v1/tokens/prc20/${address}${ticker ? `?ticker=${ticker}` : ''}`
+    )
   ).data;
 
   return result.balances;
@@ -286,7 +288,9 @@ export async function getDRC20Balances(address, ticker) {
 
 export async function getDunesBalances(address, ticker) {
   const result = (
-    await mypepe.get(`/api/v1/tokens/dunes/${address}${ticker ? `?ticker=${ticker}` : ''}`)
+    await mypepe.get(
+      `/api/v1/tokens/dunes/${address}${ticker ? `?ticker=${ticker}` : ''}`
+    )
   ).data;
 
   return result.balances;
@@ -295,7 +299,9 @@ export async function getDunesBalances(address, ticker) {
 async function getUtxos(address, cursor, result, filter, tx = null) {
   const query = (
     await mypepe.get(
-      `/api/v1/wallet/address/${address}/utxos?filter=${filter}${cursor ? `&cursor=${cursor}` : ''}`
+      `/api/v1/wallet/address/${address}/utxos?filter=${filter}${
+        cursor ? `&cursor=${cursor}` : ''
+      }`
     )
   ).data;
 

@@ -52,7 +52,7 @@ if (myDogeMask?.isMyDoge) {
     console.log('request transaction result', txReqRes);
     // { "txId": "b9fc04f226b194684fe24c786be89cae26abf8fcebbf90ff7049d5bc7fa003f0" }
 
-    // Send an inscription doginal/drc-20
+    // Send an inscription pepinal/prc-20
     // Generates a popup to be confirmed by the user
     // Promise will reject or onError will be called if canceled
     const txReqRes = await myDogeMask.requesInscriptionTransaction(
@@ -67,21 +67,21 @@ if (myDogeMask?.isMyDoge) {
     console.log('request inscription transaction result', txReqRes);
     // { "txId": "b9fc04f226b194684fe24c786be89cae26abf8fcebbf90ff7049d5bc7fa003f0" }
 
-    // Request connected address DRC-20 balance
-    const drc20BalanceRes = await myDogeMask.getDRC20Balance({ ticker: 'abcd', /*onSuccess, onError*/);
-    console.log('drc-20 balance result', drc20BalanceRes);
+    // Request connected address PRC-20 balance
+    const prc20BalanceRes = await myDogeMask.getPRC20Balance({ ticker: 'abcd', /*onSuccess, onError*/);
+    console.log('prc-20 balance result', prc20BalanceRes);
     // { "address": "DBKwBLEDY96jBtx1xCmjfBzp9FrNCWxnmM", "availableBalance": "4206912345678", "transferableBalance": "12345678", "ticker": "abcd" }
 
-    // Request connected address transferable DRC-20 locations
-    const transferableRes = await myDogeMask.getTransferableDRC20({ ticker: 'abcd', /*onSuccess, onError*/);
-    console.log('drc-20 transferable result', transferableRes);
+    // Request connected address transferable PRC-20 locations
+    const transferableRes = await myDogeMask.getTransferablePRC20({ ticker: 'abcd', /*onSuccess, onError*/);
+    console.log('prc-20 transferable result', transferableRes);
     // { inscriptions: [{ "amount": "1000", "location": "68f08b2ad7dfd26192685e04a7038223fa0259e0878e1b636776104c1535bb9f:0:0" }], ticker: 'abcd', address: 'DLRAyAnjpP6tHtzT6D7MfpWuG1nEYvw9dA'}
 
-    // Request a transaction to inscribe a transfer of avaialble drc-20 balance
+    // Request a transaction to inscribe a transfer of avaialble prc-20 balance
     // Generates a popup to be confirmed by the user
     // Promise will reject or onError will be called if canceled
-    const availableRes = await myDogeMask.requestAvailableDRC20Transaction({ ticker: 'abcd', amount: 1000, /*onSuccess, onError*/);
-    console.log('drc-20 request avaialable result', availableRes);
+    const availableRes = await myDogeMask.requestAvailablePRC20Transaction({ ticker: 'abcd', amount: 1000, /*onSuccess, onError*/);
+    console.log('prc-20 request avaialable result', availableRes);
     // { "txId": "b9fc04f226b194684fe24c786be89cae26abf8fcebbf90ff7049d5bc7fa003f0" }
 
     // Request the signing of a psbt

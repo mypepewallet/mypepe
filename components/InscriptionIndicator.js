@@ -3,17 +3,17 @@ import { Box, Text } from 'native-base';
 import { TRANSACTION_TYPES } from '../scripts/helpers/constants';
 
 const TRANSACTION_LABELS = {
-  [TRANSACTION_TYPES.DRC20_AVAILABLE_TX]: {
+  [TRANSACTION_TYPES.PRC20_AVAILABLE_TX]: {
     shortLabel: 'Token',
     fullLabel: 'Token Inscription',
     color: 'gray.200',
   },
-  [TRANSACTION_TYPES.DRC20_SEND_INSCRIPTION_TX]: {
+  [TRANSACTION_TYPES.PRC20_SEND_INSCRIPTION_TX]: {
     shortLabel: 'Token',
     fullLabel: 'Token Transfer',
     color: 'gray.200',
   },
-  [TRANSACTION_TYPES.DOGINAL_TX]: {
+  [TRANSACTION_TYPES.PEPINAL_TX]: {
     shortLabel: 'NFT',
     fullLabel: 'NFT Transfer',
     color: 'amber.100',

@@ -60,7 +60,7 @@ export function Transactions() {
 
   const [routes] = useState([
     { key: 'transactions', title: 'Transactions' },
-    { key: 'doginals', title: 'NFTs' },
+    { key: 'pepinals', title: 'NFTs' },
     { key: 'tokens', title: 'Tokens' },
   ]);
 
@@ -123,7 +123,7 @@ export function Transactions() {
       SceneMap({
         transactions: TransactionsRoute,
         tokens: TokensRoute,
-        doginals: NFTsRoute,
+        pepinals: NFTsRoute,
       }),
     [NFTsRoute, TokensRoute, TransactionsRoute]
   );

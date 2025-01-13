@@ -8,7 +8,7 @@ import { OriginBadge } from '../../components/OriginBadge';
 import { RecipientAddress } from '../../components/RecipientAddress';
 import { WalletAddress } from '../../components/WalletAddress';
 import { MESSAGE_TYPES } from '../../scripts/helpers/constants';
-import { getDunesBalances } from '../../scripts/helpers/doginals';
+import { getDunesBalances } from '../../scripts/helpers/pepinals';
 import { sendMessage } from '../../scripts/helpers/message';
 import { validateAddress } from '../../scripts/helpers/wallet';
 

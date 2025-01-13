@@ -6,10 +6,10 @@ import {
   getSelectedAddress,
 } from './helpers/data';
 import {
-  getDRC20Balances,
-  getDRC20Inscriptions,
   getDunesBalances,
-} from './helpers/doginals';
+  getPRC20Balances,
+  getPRC20Inscriptions,
+} from './helpers/pepinals';
 
 (() => {
   // Inject pepe API to all websites
@@ -80,14 +80,14 @@ import {
     }
   }
 
-  async function onGetDRC20Balance({ origin, data }) {
+  async function onGetPRC20Balance({ origin, data }) {
     let client;
     let availableBalance = '0';
     let transferableBalance = '0';
 
     try {
       client = await getConnectedClient(origin);
-      const balances = await getDRC20Balances(client?.address, data.ticker);
+      const balances = await getPRC20Balances(client?.address, data.ticker);
 
       if (balances.length) {
         availableBalance = balances[0].availableBalance;
@@ -97,14 +97,14 @@ import {
       handleError({
         errorMessage: e.message,
         origin,
-        messageType: MESSAGE_TYPES.CLIENT_GET_DRC20_BALANCE_RESPONSE,
+        messageType: MESSAGE_TYPES.CLIENT_GET_PRC20_BALANCE_RESPONSE,
       });
       return;
     }
     if (client) {
       window.postMessage(
         {
-          type: MESSAGE_TYPES.CLIENT_GET_DRC20_BALANCE_RESPONSE,
+          type: MESSAGE_TYPES.CLIENT_GET_PRC20_BALANCE_RESPONSE,
           data: {
             availableBalance,
             transferableBalance,
@@ -117,18 +117,18 @@ import {
     }
   }
 
-  async function onGetTransferableDRC20({ origin, data }) {
+  async function onGetTransferablePRC20({ origin, data }) {
     let client;
     let inscriptions = [];
 
     try {
       client = await getConnectedClient(origin);
-      inscriptions = await getDRC20Inscriptions(client?.address, data.ticker);
+      inscriptions = await getPRC20Inscriptions(client?.address, data.ticker);
     } catch (e) {
       handleError({
         errorMessage: e.message,
         origin,
-        messageType: MESSAGE_TYPES.CLIENT_GET_TRANSFERABLE_DRC20_RESPONSE,
+        messageType: MESSAGE_TYPES.CLIENT_GET_TRANSFERABLE_PRC20_RESPONSE,
       });
       return;
     }
@@ -136,7 +136,7 @@ import {
     if (client) {
       window.postMessage(
         {
-          type: MESSAGE_TYPES.CLIENT_GET_TRANSFERABLE_DRC20_RESPONSE,
+          type: MESSAGE_TYPES.CLIENT_GET_TRANSFERABLE_PRC20_RESPONSE,
           data: {
             inscriptions,
             ticker: data.ticker,
@@ -316,11 +316,11 @@ import {
         case MESSAGE_TYPES.CLIENT_GET_BALANCE:
           onGetBalance({ origin: source.origin });
           break;
-        case MESSAGE_TYPES.CLIENT_GET_DRC20_BALANCE:
-          onGetDRC20Balance({ origin: source.origin, data });
+        case MESSAGE_TYPES.CLIENT_GET_PRC20_BALANCE:
+          onGetPRC20Balance({ origin: source.origin, data });
           break;
-        case MESSAGE_TYPES.CLIENT_GET_TRANSFERABLE_DRC20:
-          onGetTransferableDRC20({ origin: source.origin, data });
+        case MESSAGE_TYPES.CLIENT_GET_TRANSFERABLE_PRC20:
+          onGetTransferablePRC20({ origin: source.origin, data });
           break;
         case MESSAGE_TYPES.CLIENT_GET_DUNES_BALANCE:
           onGetDunesBalance({ origin: source.origin, data });
@@ -331,19 +331,19 @@ import {
             responseType: MESSAGE_TYPES.CLIENT_REQUEST_TRANSACTION_RESPONSE,
           })({ origin: source.origin, data });
           break;
-        case MESSAGE_TYPES.CLIENT_REQUEST_DOGINAL_TRANSACTION:
+        case MESSAGE_TYPES.CLIENT_REQUEST_PEPINAL_TRANSACTION:
           createClientPopupHandler({
-            messageType: MESSAGE_TYPES.CLIENT_REQUEST_DOGINAL_TRANSACTION,
+            messageType: MESSAGE_TYPES.CLIENT_REQUEST_PEPINAL_TRANSACTION,
             responseType:
-              MESSAGE_TYPES.CLIENT_REQUEST_DOGINAL_TRANSACTION_RESPONSE,
+              MESSAGE_TYPES.CLIENT_REQUEST_PEPINAL_TRANSACTION_RESPONSE,
           })({ origin: source.origin, data });
           break;
-        case MESSAGE_TYPES.CLIENT_REQUEST_AVAILABLE_DRC20_TRANSACTION:
+        case MESSAGE_TYPES.CLIENT_REQUEST_AVAILABLE_PRC20_TRANSACTION:
           createClientPopupHandler({
             messageType:
-              MESSAGE_TYPES.CLIENT_REQUEST_AVAILABLE_DRC20_TRANSACTION,
+              MESSAGE_TYPES.CLIENT_REQUEST_AVAILABLE_PRC20_TRANSACTION,
             responseType:
-              MESSAGE_TYPES.CLIENT_REQUEST_AVAILABLE_DRC20_TRANSACTION_RESPONSE,
+              MESSAGE_TYPES.CLIENT_REQUEST_AVAILABLE_PRC20_TRANSACTION_RESPONSE,
           })({ origin: source.origin, data });
           break;
         case MESSAGE_TYPES.CLIENT_REQUEST_DUNES_TRANSACTION:

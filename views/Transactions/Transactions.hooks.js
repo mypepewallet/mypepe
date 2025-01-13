@@ -103,13 +103,13 @@ export const useTransactions = ({ wallet, selectedAddressIndex, navigate }) => {
     async ({ cursor, currentTokens = [] } = {}) => {
       setTokensLoading(true);
       try {
-        const drc20res = (await mypepe.get(`/api/v1/tokens/drc20/${walletAddress}`)).data;
+        const prc20res = (await mypepe.get(`/api/v1/tokens/prc20/${walletAddress}`)).data;
         const dunes20res = (await mypepe.get(`/api/v1/tokens/dunes/${walletAddress}`)).data;
 
         setTokens(
           [
             ...currentTokens,
-            ...(drc20res.balances ?? []),
+            ...(prc20res.balances ?? []),
             ...(dunes20res.balances ?? []),
           ].sort((a, b) => {
             if (a.ticker < b.ticker) {
@@ -121,7 +121,7 @@ export const useTransactions = ({ wallet, selectedAddressIndex, navigate }) => {
             return 0;
           })
         );
-        setTokensTotal(drc20res.total + dunes20res.total);
+        setTokensTotal(prc20res.total + dunes20res.total);
         // Don't increment page on initial fetch, where cursor is undefined
         if (typeof cursor === 'number') {
           currentTokensPage.current = cursor;

@@ -27,21 +27,21 @@ export const BLOCK_CONFIRMATIONS = 1;
 export const TRANSACTION_PAGE_SIZE = 10;
 
 export const TRANSACTION_TYPES = {
-  DRC20_AVAILABLE_TX: 'drc20_available_tx',
-  DRC20_SEND_INSCRIPTION_TX: 'drc20_send_inscription_tx',
-  DOGINAL_TX: 'doginal_tx',
+  PRC20_AVAILABLE_TX: 'prc20_available_tx',
+  PRC20_SEND_INSCRIPTION_TX: 'prc20_send_inscription_tx',
+  PEPINAL_TX: 'pepinal_tx',
 };
-export const DOGINAL_TX = 'doginal_tx';
+export const PEPINAL_TX = 'pepinal_tx';
 
 export const TRANSACTION_PENDING_TIME = 1000 * 60 * 2; // 2 minutes
 
 const CLIENT_MESSAGE_TYPES = {
   CLIENT_GET_BALANCE: 'clientRequestBalance',
   CLIENT_GET_BALANCE_RESPONSE: 'clientGetBalanceResponse',
-  CLIENT_GET_DRC20_BALANCE: 'clientGetDRC20Balance',
-  CLIENT_GET_DRC20_BALANCE_RESPONSE: 'clientGetDRC20BalanceResponse',
-  CLIENT_GET_TRANSFERABLE_DRC20: 'clientGetTransferableDRC20',
-  CLIENT_GET_TRANSFERABLE_DRC20_RESPONSE: 'clientGetTransferableDRC20Response',
+  CLIENT_GET_PRC20_BALANCE: 'clientGetPRC20Balance',
+  CLIENT_GET_PRC20_BALANCE_RESPONSE: 'clientGetPRC20BalanceResponse',
+  CLIENT_GET_TRANSFERABLE_PRC20: 'clientGetTransferablePRC20',
+  CLIENT_GET_TRANSFERABLE_PRC20_RESPONSE: 'clientGetTransferablePRC20Response',
   CLIENT_GET_DUNES_BALANCE: 'clientGetDunesalance',
   CLIENT_GET_DUNES_BALANCE_RESPONSE: 'clientGetDunesBalanceResponse',
   CLIENT_DISCONNECT: 'clientDisconnect',
@@ -67,21 +67,21 @@ export const CLIENT_POPUP_MESSAGE_PAIRS = [
   },
   {
     request: {
-      CLIENT_REQUEST_DOGINAL_TRANSACTION: 'clientRequestDoginalTransaction',
+      CLIENT_REQUEST_PEPINAL_TRANSACTION: 'clientRequestPepinalTransaction',
     },
     response: {
-      CLIENT_REQUEST_DOGINAL_TRANSACTION_RESPONSE:
-        'clientRequestDoginalTransactionResponse',
+      CLIENT_REQUEST_PEPINAL_TRANSACTION_RESPONSE:
+        'clientRequestPepinalTransactionResponse',
     },
   },
   {
     request: {
-      CLIENT_REQUEST_AVAILABLE_DRC20_TRANSACTION:
-        'clientRequestDRC20Transaction',
+      CLIENT_REQUEST_AVAILABLE_PRC20_TRANSACTION:
+        'clientRequestPRC20Transaction',
     },
     response: {
-      CLIENT_REQUEST_AVAILABLE_DRC20_TRANSACTION_RESPONSE:
-        'clientRequestDRC20TransactionResponse',
+      CLIENT_REQUEST_AVAILABLE_PRC20_TRANSACTION_RESPONSE:
+        'clientRequestPRC20TransactionResponse',
     },
   },
   {

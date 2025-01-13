@@ -44,7 +44,7 @@ export const TransferTokenAddress = ({
     if (validate()) {
       setLoading(true);
       setFormPage(
-        selectedToken.protocol === 'drc20' ? 'amountDRC20' : 'amountDunes'
+        selectedToken.protocol === 'prc20' ? 'amountPRC20' : 'amountDunes'
       );
     }
   }, [selectedToken.protocol, setFormPage, validate]);

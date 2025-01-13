@@ -58,7 +58,7 @@ export const TransferNFTConfirmation = ({
             data: {
               rawTx: formData.rawTx,
               selectedAddressIndex,
-              txType: TRANSACTION_TYPES.DOGINAL_TX,
+              txType: TRANSACTION_TYPES.PEPINAL_TX,
               location: selectedNFT.location,
             },
           },

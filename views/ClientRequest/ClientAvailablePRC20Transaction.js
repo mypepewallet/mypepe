@@ -7,10 +7,10 @@ import { ClientPopupLoading } from '../../components/ClientPopupLoading';
 import { OriginBadge } from '../../components/OriginBadge';
 import { WalletAddress } from '../../components/WalletAddress';
 import { MESSAGE_TYPES } from '../../scripts/helpers/constants';
-import { getDRC20Balances } from '../../scripts/helpers/doginals';
 import { sendMessage } from '../../scripts/helpers/message';
+import { getPRC20Balances } from '../../scripts/helpers/pepinals';
 
-export function ClientAvailableDRC20Transaction({
+export function ClientAvailablePRC20Transaction({
   params,
   connectedClient,
   connectedAddressIndex,
@@ -43,7 +43,7 @@ export function ClientAvailableDRC20Transaction({
       return;
     (async () => {
       setPageLoading(true);
-      const balances = await getDRC20Balances(connectedClient?.address, ticker);
+      const balances = await getPRC20Balances(connectedClient?.address, ticker);
       const ab = Number(balances[0]?.availableBalance || 0);
       const amt = Number(amount);
 
@@ -73,7 +73,7 @@ export function ClientAvailableDRC20Transaction({
             setTransaction({ txs, fee });
           } else {
             handleResponse({
-              error: 'Unable to create available drc-20 transaction',
+              error: 'Unable to create available prc-20 transaction',
               toastTitle: 'Error',
               toastMessage: 'Unable to create transaction',
             });

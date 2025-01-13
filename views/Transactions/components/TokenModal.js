@@ -36,10 +36,11 @@ export const TokenModal = ({ isOpen, onClose, token }) => {
     pendingAvailableAmount,
   } = token ?? {};
 
-  const tBalance = protocol === 'drc20' ? transferableBalance : overallBalance;
+  const tBalance = protocol === 'prc20' ? transferableBalance : overallBalance;
 
   const fetchTokenDetails = useCallback(() => {
-    mypepe.get(`/api/v1/tokens/${protocol}/data/${ticker}`)
+    mypepe
+      .get(`/api/v1/tokens/${protocol}/data/${ticker}`)
       .then((res) => {
         setTokenDetails(res.data);
       })
@@ -151,7 +152,7 @@ export const TokenModal = ({ isOpen, onClose, token }) => {
               />
             )}
             <VStack space='12px' w='100%' alignItems='flex-start' py='30px'>
-              {protocol === 'drc20' && (
+              {protocol === 'prc20' && (
                 <HStack justifyContent='space-between' w='100%'>
                   <Text color='gray.700' fontSize='16px' fontWeight='semibold'>
                     Available balance:{' '}

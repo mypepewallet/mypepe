@@ -19,8 +19,8 @@ import {
   TRANSACTION_TYPES,
   WALLET,
 } from './helpers/constants';
-import { getSpendableUtxos, inscribe } from './helpers/doginals';
 import { addListener } from './helpers/message';
+import { getSpendableUtxos, inscribe } from './helpers/pepinals';
 import {
   clearSessionStorage,
   getCachedTx,
@@ -121,7 +121,7 @@ async function onCreateTransaction({ data = {}, sendResponse } = {}) {
       sender: data.senderAddress,
       recipient: data.recipientAddress,
       amount,
-      fee: 10000
+      fee: 10000,
     });
     const { rawTx, fee, amount: resultAmount } = response.data;
     let amountMismatch = false;
@@ -144,12 +144,15 @@ async function onCreateTransaction({ data = {}, sendResponse } = {}) {
 
 async function onCreateNFTTransaction({ data = {}, sendResponse } = {}) {
   try {
-    const response = await mypepe.post('/api/v1/transactions/prepare/inscription', {
-      sender: data.address,
-      recipient: data.recipientAddress,
-      location: data.location,
-      inscriptionId: data.inscriptionId,
-    });
+    const response = await mypepe.post(
+      '/api/v1/transactions/prepare/inscription',
+      {
+        sender: data.address,
+        recipient: data.recipientAddress,
+        location: data.location,
+        inscriptionId: data.inscriptionId,
+      }
+    );
     const { rawTx, fee, amount } = response.data;
 
     sendResponse?.({
@@ -202,7 +205,7 @@ async function onInscribeTransferTransaction({ data = {}, sendResponse } = {}) {
     console.log('found feePerKB', feePerKB);
 
     // Build the inscription json
-    const inscription = `{"p":"drc-20","op":"transfer","tick":"${data.ticker}","amt":"${data.tokenAmount}"}`;
+    const inscription = `{"p":"prc-20","op":"transfer","tick":"${data.ticker}","amt":"${data.tokenAmount}"}`;
     const inscriptionHex = Buffer.from(inscription).toString('hex');
 
     console.log('inscription', inscription, inscriptionHex);
@@ -296,7 +299,8 @@ function onSendTransaction({ data = {}, sendResponse } = {}) {
           method: 'sendrawtransaction',
           params: [signed],
         };
-        const jsonrpcRes = (await mypepe.post('/api/v1/wallet/rpc', jsonrpcReq)).data;
+        const jsonrpcRes = (await mypepe.post('/api/v1/wallet/rpc', jsonrpcReq))
+          .data;
 
         // Open offscreen notification page to handle transaction status notifications
         chrome.offscreen
@@ -312,7 +316,7 @@ function onSendTransaction({ data = {}, sendResponse } = {}) {
         // Cache spent utxos
         await cacheSignedTx(signed);
 
-        // Cache transaction if it's a DRC20 transaction
+        // Cache transaction if it's a PRC20 transaction
         if (data.txType) {
           const txsCache = (await getLocalValue(INSCRIPTION_TXS_CACHE)) ?? [];
 
@@ -359,7 +363,8 @@ async function onSendInscribeTransfer({ data = {}, sendResponse } = {}) {
         jsonrpcReq.params[0]
       );
 
-      const jsonrpcRes = (await mypepe.post('/api/v1/wallet/rpc', jsonrpcReq)).data;
+      const jsonrpcRes = (await mypepe.post('/api/v1/wallet/rpc', jsonrpcReq))
+        .data;
       await cacheSignedTx(signed);
 
       results.push(jsonrpcRes.result);
@@ -381,7 +386,7 @@ async function onSendInscribeTransfer({ data = {}, sendResponse } = {}) {
 
     txsCache.push({
       txs: results,
-      txType: TRANSACTION_TYPES.DRC20_AVAILABLE_TX,
+      txType: TRANSACTION_TYPES.PRC20_AVAILABLE_TX,
       tokenAmount: data.tokenAmount,
       timestamp: Date.now(),
       ticker: data.ticker,
@@ -445,7 +450,8 @@ async function onSendPsbt({ data = {}, sendResponse } = {}) {
 
     console.log(`sending signed psbt`, jsonrpcReq.params[0]);
 
-    const jsonrpcRes = (await mypepe.post('/api/v1/wallet/rpc', jsonrpcReq)).data;
+    const jsonrpcRes = (await mypepe.post('/api/v1/wallet/rpc', jsonrpcReq))
+      .data;
 
     console.log(`tx id ${jsonrpcRes.result}`);
 
@@ -575,9 +581,8 @@ function onCreateWallet({ data = {}, sendResponse } = {}) {
 
 async function onGetPepecoinPrice({ sendResponse } = {}) {
   try {
-    const response = (
-      await mypepe.get('/api/v1/wallet/tickers?currency=usd')
-    ).data;
+    const response = (await mypepe.get('/api/v1/wallet/tickers?currency=usd'))
+      .data;
 
     sendResponse?.(response.rates);
   } catch (err) {
@@ -591,9 +596,8 @@ async function onGetAddressBalance({ data, sendResponse } = {}) {
     const addresses = data.addresses?.length ? data.addresses : [data.address];
     const balances = await Promise.all(
       addresses.map(async (address) => {
-        const response = (
-          await mypepe.get(`/api/v1/wallet/address/${address}`)
-        ).data;
+        const response = (await mypepe.get(`/api/v1/wallet/address/${address}`))
+          .data;
 
         return response.balance;
       })
@@ -617,7 +621,7 @@ async function onGetTransactions({ data, sendResponse } = {}) {
       await mypepe.get(`/api/v1/wallet/address/${data.address}/transactions`, {
         params: {
           page: data.page || 1,
-          pageSize: TRANSACTION_PAGE_SIZE
+          pageSize: TRANSACTION_PAGE_SIZE,
         },
       })
     ).data;
@@ -644,9 +648,8 @@ async function onGetTransactions({ data, sendResponse } = {}) {
 
 async function onGetTransactionDetails({ data, sendResponse } = {}) {
   try {
-    const transaction = (
-      await mypepe.get(`/api/v1/transactions/${data.txId}`)
-    ).data;
+    const transaction = (await mypepe.get(`/api/v1/transactions/${data.txId}`))
+      .data;
 
     sendResponse?.(transaction);
   } catch (err) {
@@ -832,13 +835,13 @@ async function onDisconnectClient({ sendResponse, data: { origin } } = {}) {
   return true;
 }
 
-async function onApproveAvailableDRC20Transaction({
+async function onApproveAvailablePRC20Transaction({
   sendResponse,
   data: { txId, error, originTabId, origin, ticker, tokenAmount },
 } = {}) {
   if (txId) {
     chrome.tabs?.sendMessage(originTabId, {
-      type: MESSAGE_TYPES.CLIENT_REQUEST_AVAILABLE_DRC20_TRANSACTION_RESPONSE,
+      type: MESSAGE_TYPES.CLIENT_REQUEST_AVAILABLE_PRC20_TRANSACTION_RESPONSE,
       data: {
         txId,
         ticker,
@@ -849,7 +852,7 @@ async function onApproveAvailableDRC20Transaction({
     sendResponse(true);
   } else {
     chrome.tabs?.sendMessage(originTabId, {
-      type: MESSAGE_TYPES.CLIENT_REQUEST_AVAILABLE_DRC20_TRANSACTION_RESPONSE,
+      type: MESSAGE_TYPES.CLIENT_REQUEST_AVAILABLE_PRC20_TRANSACTION_RESPONSE,
       error,
       origin,
     });
@@ -882,13 +885,13 @@ async function onApproveTransaction({
   return true;
 }
 
-async function onApproveDoginalTransaction({
+async function onApprovePepinalTransaction({
   sendResponse,
   data: { txId, error, originTabId, origin },
 } = {}) {
   if (txId) {
     chrome.tabs?.sendMessage(originTabId, {
-      type: MESSAGE_TYPES.CLIENT_REQUEST_DOGINAL_TRANSACTION_RESPONSE,
+      type: MESSAGE_TYPES.CLIENT_REQUEST_PEPINAL_TRANSACTION_RESPONSE,
       data: {
         txId,
       },
@@ -897,7 +900,7 @@ async function onApproveDoginalTransaction({
     sendResponse(true);
   } else {
     chrome.tabs?.sendMessage(originTabId, {
-      type: MESSAGE_TYPES.CLIENT_REQUEST_DOGINAL_TRANSACTION_RESPONSE,
+      type: MESSAGE_TYPES.CLIENT_REQUEST_PEPINAL_TRANSACTION_RESPONSE,
       error,
       origin,
     });
@@ -1276,12 +1279,12 @@ export const messageHandler = ({ message, data }, sender, sendResponse) => {
     case MESSAGE_TYPES.CLIENT_REQUEST_CONNECTION_RESPONSE:
       onApproveConnection({ sender, sendResponse, data });
       break;
-    case MESSAGE_TYPES.CLIENT_REQUEST_DOGINAL_TRANSACTION_RESPONSE:
-      onApproveDoginalTransaction({ data, sendResponse, sender });
+    case MESSAGE_TYPES.CLIENT_REQUEST_PEPINAL_TRANSACTION_RESPONSE:
+      onApprovePepinalTransaction({ data, sendResponse, sender });
       break;
     case MESSAGE_TYPES.CLIENT_REQUEST_TRANSACTION:
-    case MESSAGE_TYPES.CLIENT_REQUEST_DOGINAL_TRANSACTION:
-    case MESSAGE_TYPES.CLIENT_REQUEST_AVAILABLE_DRC20_TRANSACTION:
+    case MESSAGE_TYPES.CLIENT_REQUEST_PEPINAL_TRANSACTION:
+    case MESSAGE_TYPES.CLIENT_REQUEST_AVAILABLE_PRC20_TRANSACTION:
     case MESSAGE_TYPES.CLIENT_REQUEST_DUNES_TRANSACTION:
     case MESSAGE_TYPES.CLIENT_REQUEST_PSBT:
     case MESSAGE_TYPES.CLIENT_REQUEST_SIGNED_MESSAGE:
@@ -1299,8 +1302,8 @@ export const messageHandler = ({ message, data }, sender, sendResponse) => {
     case MESSAGE_TYPES.CLIENT_REQUEST_PSBT_RESPONSE:
       onApprovePsbt({ data, sendResponse, sender });
       break;
-    case MESSAGE_TYPES.CLIENT_REQUEST_AVAILABLE_DRC20_TRANSACTION_RESPONSE:
-      onApproveAvailableDRC20Transaction({ data, sendResponse, sender });
+    case MESSAGE_TYPES.CLIENT_REQUEST_AVAILABLE_PRC20_TRANSACTION_RESPONSE:
+      onApproveAvailablePRC20Transaction({ data, sendResponse, sender });
       break;
     case MESSAGE_TYPES.CLIENT_REQUEST_DUNES_TRANSACTION_RESPONSE:
       onApproveDunesTransaction({ data, sendResponse, sender });

@@ -100,9 +100,9 @@ export const TransactionModal = ({
 
             {cachedInscription &&
             (cachedInscription.txType ===
-              TRANSACTION_TYPES.DRC20_AVAILABLE_TX ||
+              TRANSACTION_TYPES.PRC20_AVAILABLE_TX ||
               cachedInscription.txType ===
-                TRANSACTION_TYPES.DRC20_SEND_INSCRIPTION_TX) ? (
+                TRANSACTION_TYPES.PRC20_SEND_INSCRIPTION_TX) ? (
               <>
                 <HStack justifyContent='space-between' w='100%'>
                   <Text color='gray.500'>Ticker </Text>

@@ -10,7 +10,7 @@ import { mypepe } from '../scripts/api';
 import {
   getInscriptionsUtxos,
   getSpendableUtxos,
-} from '../scripts/helpers/doginals';
+} from '../scripts/helpers/pepinals';
 import { network } from '../scripts/helpers/wallet';
 
 const cliOptions = [{ name: 'send', alias: 's', type: Boolean }];

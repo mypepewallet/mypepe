@@ -33,7 +33,7 @@ export const TransferDunesConfirmation = ({
         data: {
           rawTx: formData.rawTx,
           selectedAddressIndex,
-          txType: TRANSACTION_TYPES.DRC20_SEND_INSCRIPTION_TX,
+          txType: TRANSACTION_TYPES.PRC20_SEND_INSCRIPTION_TX,
           ticker: selectedToken.ticker,
           tokenAmount: formData.tokenAmount,
         },

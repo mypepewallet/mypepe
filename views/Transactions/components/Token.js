@@ -20,7 +20,7 @@ export const Token = ({
 
   // Pending transfer inscriptions
   const pendingTransferTxs = pendingTxs?.filter(
-    (tx) => tx.txType === TRANSACTION_TYPES.DRC20_SEND_INSCRIPTION_TX
+    (tx) => tx.txType === TRANSACTION_TYPES.PRC20_SEND_INSCRIPTION_TX
   );
   const pendingTransferAmount = pendingTransferTxs?.length
     ? pendingTransferTxs.reduce((acc, tx) => acc + Number(tx.tokenAmount), 0)
@@ -29,7 +29,7 @@ export const Token = ({
 
   // Pending available inscriptions
   const pendingAvailableTxs = pendingTxs?.filter(
-    (tx) => tx.txType === TRANSACTION_TYPES.DRC20_AVAILABLE_TX
+    (tx) => tx.txType === TRANSACTION_TYPES.PRC20_AVAILABLE_TX
   );
   const pendingAvailableAmount = pendingAvailableTxs?.length
     ? pendingAvailableTxs.reduce((acc, tx) => acc + Number(tx.tokenAmount), 0)
@@ -66,7 +66,7 @@ export const Token = ({
               {Number(overallBalance).toLocaleString()}
             </Text>
 
-            {protocol === 'drc20' ? ( // Potentially add more protocols
+            {protocol === 'prc20' ? ( // Potentially add more protocols
               <HStack>
                 <Text
                   fontSize='12px'

@@ -13,7 +13,7 @@ import {
 import { sendMessage } from '../../scripts/helpers/message';
 import { NFTView } from '../Transactions/components/NFTView';
 
-export const TransferDRC20Confirmation = ({
+export const TransferPRC20Confirmation = ({
   setFormPage,
   errors,
   setErrors,
@@ -34,7 +34,7 @@ export const TransferDRC20Confirmation = ({
         data: {
           rawTx: formData.rawTx,
           selectedAddressIndex,
-          txType: TRANSACTION_TYPES.DRC20_SEND_INSCRIPTION_TX,
+          txType: TRANSACTION_TYPES.PRC20_SEND_INSCRIPTION_TX,
           ticker: selectedToken.ticker,
           tokenAmount: selectedNFT.amount,
           location: selectedNFT.location,
@@ -117,7 +117,7 @@ export const TransferDRC20Confirmation = ({
         <Button
           variant='unstyled'
           colorScheme='coolGray'
-          onPress={() => setFormPage('amountDRC20')}
+          onPress={() => setFormPage('amountPRC20')}
         >
           Back
         </Button>

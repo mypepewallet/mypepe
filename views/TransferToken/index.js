@@ -4,8 +4,8 @@ import { useSearchParams } from 'react-router-dom';
 
 import { Layout } from '../../components/Layout';
 import { useAppContext } from '../../hooks/useAppContext';
-import { TransferDRC20Amount } from './TransferDRC20Amount';
-import { TransferDRC20Confirmation } from './TransferDRC20Confirmation';
+import { TransferPRC20Amount } from './TransferPRC20Amount';
+import { TransferPRC20Confirmation } from './TransferPRC20Confirmation';
 import { TransferDunesAmount } from './TransferDunesAmount';
 import { TransferDunesConfirmation } from './TransferDunesConfirmation';
 import { TransferTokenAddress } from './TransferTokenAddress';
@@ -22,9 +22,9 @@ export function TransferToken() {
   const RenderScreen =
     {
       address: TransferTokenAddress,
-      amountDRC20: TransferDRC20Amount,
+      amountPRC20: TransferPRC20Amount,
       amountDunes: TransferDunesAmount,
-      confirmationDRC20: TransferDRC20Confirmation,
+      confirmationPRC20: TransferPRC20Confirmation,
       confirmationDunes: TransferDunesConfirmation,
     }[formPage] ?? null;
 

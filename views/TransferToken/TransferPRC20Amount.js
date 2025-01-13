@@ -15,11 +15,11 @@ import { RecipientAddress } from '../../components/RecipientAddress';
 import { ToastRender } from '../../components/ToastRender';
 import { WalletAddress } from '../../components/WalletAddress';
 import { MESSAGE_TYPES } from '../../scripts/helpers/constants';
-import { getDRC20Inscriptions } from '../../scripts/helpers/doginals';
+import { getPRC20Inscriptions } from '../../scripts/helpers/pepinals';
 import { sendMessage } from '../../scripts/helpers/message';
 import { NFT } from '../Transactions/components/NFT';
 
-export const TransferDRC20Amount = ({
+export const TransferPRC20Amount = ({
   setFormPage,
   setFormData,
   formData,
@@ -36,7 +36,7 @@ export const TransferDRC20Amount = ({
       try {
         setLoading(true);
 
-        const transfers = await getDRC20Inscriptions(
+        const transfers = await getPRC20Inscriptions(
           walletAddress,
           selectedToken.ticker
         );
@@ -98,7 +98,7 @@ export const TransferDRC20Amount = ({
             fee,
             pepeAmount: amount,
           });
-          setFormPage('confirmationDRC20');
+          setFormPage('confirmationPRC20');
           setLoading(false);
         } else {
           setLoading(false);

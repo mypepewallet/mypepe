@@ -94,7 +94,7 @@ export function ClientPSBT({
             const value = sb.toBitcoin(tx.vout[input.index].value);
 
             if (indexes.includes(index)) {
-              amount += value;
+              amount += tx.vout[input.index].value;
             }
 
             return {
@@ -110,12 +110,12 @@ export function ClientPSBT({
           // Subtract change output
           psbt?.txOutputs?.forEach((output) => {
             if (output.address === connectedClient.address) {
-              amount -= sb.toBitcoin(output.value);
+              amount -= output.value;
             }
           });
         }
 
-        setPepeAmount(amount);
+        setPepeAmount(sb.toBitcoin(amount));
         setInputs(mappedInputs);
       }
     })();

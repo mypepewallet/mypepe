@@ -6,7 +6,7 @@ import sb from 'satoshi-bitcoin';
 dotenv.config();
 
 import { mypepe } from '../scripts/api';
-import { getSpendableUtxos } from '../scripts/helpers/doginals';
+import { getSpendableUtxos } from '../scripts/helpers/pepinals';
 import { network } from '../scripts/helpers/wallet';
 import { MIN_TX_AMOUNT } from '../scripts/helpers/constants';
 

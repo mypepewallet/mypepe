@@ -12,12 +12,12 @@ import {
   MESSAGE_TYPES,
   TRANSACTION_TYPES,
 } from '../../scripts/helpers/constants';
-import { getInscriptionsUtxo } from '../../scripts/helpers/doginals';
+import { getInscriptionsUtxo } from '../../scripts/helpers/pepinals';
 import { sendMessage } from '../../scripts/helpers/message';
 import { validateAddress } from '../../scripts/helpers/wallet';
 import { NFTView } from '../Transactions/components/NFTView';
 
-export function ClientDoginalTransaction({
+export function ClientPepinalTransaction({
   params,
   connectedClient,
   connectedAddressIndex,
@@ -61,16 +61,16 @@ export function ClientDoginalTransaction({
 
       setPageLoading(true);
 
-      const doginal = await getInscriptionsUtxo(connectedClient?.address, {
+      const pepinal = await getInscriptionsUtxo(connectedClient?.address, {
         txid,
         vout,
       });
 
-      const inscription = doginal?.inscriptions?.find(
+      const inscription = pepinal?.inscriptions?.find(
         (i) => i.offset === offset
       );
 
-      if (!doginal || !inscription) {
+      if (!pepinal || !inscription) {
         handleResponse({
           toastMessage: 'NFT not found',
           toastTitle: 'Error',
@@ -90,7 +90,7 @@ export function ClientDoginalTransaction({
         {
           message: MESSAGE_TYPES.CREATE_NFT_TRANSACTION,
           data: {
-            ...doginal,
+            ...pepinal,
             recipientAddress,
             location,
             address: connectedClient?.address,
@@ -214,7 +214,7 @@ const ConfirmationModal = ({
         data: {
           rawTx,
           selectedAddressIndex: addressIndex,
-          txType: TRANSACTION_TYPES.DOGINAL_TX,
+          txType: TRANSACTION_TYPES.PEPINAL_TX,
         },
       },
       (txId) => {
