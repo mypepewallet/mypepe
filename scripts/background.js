@@ -121,7 +121,7 @@ async function onCreateTransaction({ data = {}, sendResponse } = {}) {
       sender: data.senderAddress,
       recipient: data.recipientAddress,
       amount,
-      fee: 10000,
+      feeRate: data.feeRate || 5000,
     });
     const { rawTx, fee, amount: resultAmount } = response.data;
     let amountMismatch = false;
@@ -151,6 +151,7 @@ async function onCreateNFTTransaction({ data = {}, sendResponse } = {}) {
         recipient: data.recipientAddress,
         location: data.location,
         inscriptionId: data.inscriptionId,
+        feeRate: data.feeRate || 5000,
       }
     );
     const { rawTx, fee, amount } = response.data;
@@ -174,7 +175,10 @@ async function onInscribeTransferTransaction({ data = {}, sendResponse } = {}) {
     const spentUtxosCache = (await getLocalValue(SPENT_UTXOS_CACHE)) ?? [];
 
     utxos = utxos.filter(
-      (utxo) => !spentUtxosCache.find((cache) => cache.txid === utxo.txid)
+      (utxo) =>
+        !spentUtxosCache.find(
+          (cache) => cache.txid === utxo.txid && cache.vout === utxo.vout
+        )
     );
 
     console.log('found utxos', utxos.length);
@@ -193,14 +197,16 @@ async function onInscribeTransferTransaction({ data = {}, sendResponse } = {}) {
 
     console.log('num utxos', utxos.length);
 
-    const smartfeeReq = {
-      jsonrpc: '2.0',
-      id: `${data.address}_estimatesmartfee_${Date.now()}`,
-      method: 'estimatesmartfee',
-      params: [BLOCK_CONFIRMATIONS], // confirm within x blocks
-    };
-    const feeData = (await mypepe.post('/api/v1/wallet/rpc', smartfeeReq)).data;
-    const feePerKB = sb.toSatoshi(feeData.result.feerate * 2 || FEE_RATE_KB);
+    // const smartfeeReq = {
+    //   jsonrpc: '2.0',
+    //   id: `${data.address}_estimatesmartfee_${Date.now()}`,
+    //   method: 'estimatesmartfee',
+    //   params: [BLOCK_CONFIRMATIONS], // confirm within x blocks
+    // };
+    // const feeData = (await mypepe.post('/api/v1/wallet/rpc', smartfeeReq)).data;
+    // const feePerKB = sb.toSatoshi(feeData.result.feerate * 2 || FEE_RATE_KB);
+
+    const feePerKB = (data.feeRate || 5000) * 1000;
 
     console.log('found feePerKB', feePerKB);
 

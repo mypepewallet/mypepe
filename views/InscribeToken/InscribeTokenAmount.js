@@ -68,8 +68,13 @@ export const InscribeTokenAmount = ({
   }, [onChangeTextToken, selectedToken.availableBalance]);
 
   const validate = useCallback(() => {
-    return selectedToken.availableBalance >= Number(formData.tokenAmount);
-  }, [selectedToken.availableBalance, formData.tokenAmount]);
+    return (
+      selectedToken.availableBalance >= Number(formData.tokenAmount) &&
+      Number(formData.tokenAmount) > 0 &&
+      formData.feeRate &&
+      Number(formData.feeRate) >= 5000
+    );
+  }, [selectedToken.availableBalance, formData.tokenAmount, formData.feeRate]);
 
   const onSubmit = useCallback(() => {
     if (validate()) {
@@ -82,6 +87,7 @@ export const InscribeTokenAmount = ({
             selectedAddressIndex,
             walletAddress,
             tokenAmount: formData.tokenAmount,
+            feeRate: formData.feeRate,
           },
         },
         ({ txs, fee }) => {
@@ -161,51 +167,112 @@ export const InscribeTokenAmount = ({
         transfer.
       </Text>
       <Box
-        justifyContent='center'
+        display='flex'
+        flexDirection='column'
         alignItems='center'
-        pt='14px'
-        pb='8px'
         w='80%'
-        h='70px'
+        py='14px'
+        gap='12px'
       >
-        <Input
-          keyboardType='numeric'
-          variant='filled'
-          placeholder='0'
-          focusOutlineColor='brandGreen.500'
-          _hover={{
-            borderColor: 'brandGreen.500',
-          }}
-          _invalid={{
-            borderColor: 'red.500',
-            focusOutlineColor: 'red.500',
-            _hover: {
+        {/* Token Amount Input */}
+        <Box w='100%'>
+          <Input
+            keyboardType='numeric'
+            variant='filled'
+            placeholder='0'
+            focusOutlineColor='brandGreen.500'
+            _hover={{
+              borderColor: 'brandGreen.500',
+            }}
+            _invalid={{
               borderColor: 'red.500',
-            },
-          }}
-          isInvalid={errors.tokenAmount}
-          onChangeText={onChangeTextToken}
-          onSubmitEditing={onSubmit}
-          autoFocus
-          type='number'
-          fontSize='24px'
-          fontWeight='semibold'
-          _input={{
-            py: '10px',
-            pl: '4px',
-            type: 'number',
-          }}
-          InputLeftElement={
-            <Text fontSize='24px' fontWeight='semibold' px='4px'>
-              {selectedToken.ticker}
-            </Text>
-          }
-          textAlign='center'
-          ref={tokenInputRef}
-          value={formData.tokenAmount}
-        />
-      </Box>
+              focusOutlineColor: 'red.500',
+              _hover: {
+                borderColor: 'red.500',
+              },
+            }}
+            isInvalid={errors.tokenAmount}
+            onChangeText={onChangeTextToken}
+            onSubmitEditing={onSubmit}
+            autoFocus
+            type='number'
+            fontSize='24px'
+            fontWeight='semibold'
+            _input={{
+              py: '10px',
+              pl: '4px',
+              type: 'number',
+            }}
+            InputLeftElement={
+              <Text fontSize='24px' fontWeight='semibold' px='4px'>
+                {selectedToken.ticker}
+              </Text>
+            }
+            textAlign='center'
+            ref={tokenInputRef}
+            value={formData.tokenAmount}
+          />
+        </Box>
 
+        {/* Fee Rate Input */}
+        <Box w='100%'>
+          <Input
+            keyboardType='numeric'
+            variant='filled'
+            placeholder='Fee Rate, min 5000'
+            focusOutlineColor='brandGreen.500'
+            _hover={{
+              borderColor: 'brandGreen.500',
+            }}
+            _invalid={{
+              borderColor: 'red.500',
+              focusOutlineColor: 'red.500',
+              _hover: {
+                borderColor: 'red.500',
+              },
+            }}
+            isInvalid={errors.feeRate}
+            onChangeText={(value) => {
+              const numValue = parseInt(value, 10);
+              if (!Number.isNaN(numValue) && numValue >= 0) {
+                setFormData((prev) => ({
+                  ...prev,
+                  feeRate: numValue,
+                }));
+              }
+            }}
+            onBlur={() => {
+              const currentValue = parseInt(formData.feeRate, 10);
+              if (
+                !formData.feeRate ||
+                Number.isNaN(currentValue) ||
+                currentValue < 5000
+              ) {
+                setFormData((prev) => ({
+                  ...prev,
+                  feeRate: 5000,
+                }));
+              }
+            }}
+            type='number'
+            fontSize='16px'
+            fontWeight='normal'
+            _input={{
+              py: '6px',
+              pl: '4px',
+              type: 'number',
+            }}
+            InputRightElement={
+              <Text fontSize='12px' color='gray.500' px='4px'>
+                ribbit/vB
+              </Text>
+            }
+            textAlign='center'
+            value={formData.feeRate}
+            size='sm'
+          />
+        </Box>
+      </Box>
       <Text fontSize='10px' color='red.500'>
         {errors.tokenAmount || ' '}
       </Text>

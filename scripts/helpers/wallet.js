@@ -119,6 +119,9 @@ export function signRawPsbt(
   const finalPsbt = bitcoin.Psbt.fromHex(rawTx, { network });
   finalPsbt.setMaximumFeeRate(100000000);
 
+  let amount = 0;
+  let fee = 0;
+
   if (partial) {
     if (!SIGHASH_TYPE_WHITELIST.includes(sighashType)) return;
     for (let i = 0; i < indexes.length; i++) {
@@ -126,8 +129,58 @@ export function signRawPsbt(
       finalPsbt.signInput(index, keyPair, [sighashType]);
       finalPsbt.finalizeInput(index);
     }
+
+    switch (sighashType) {
+      case 1: // SIGHASH_ALL
+        amount = finalPsbt.txOutputs.reduce(
+          (acc, output) => acc + output.value,
+          0
+        );
+        fee =
+          amount -
+          finalPsbt.txInputs.reduce((acc, output) => acc + output.value, 0);
+        break;
+
+      case 3: // SIGHASH_SINGLE
+        amount = indexes.reduce((acc, index) => {
+          const output = finalPsbt.txOutputs[index];
+          return output ? acc + output.value : acc;
+        }, 0);
+        fee = 0;
+        break;
+
+      case 128: // SIGHASH_ANYONECANPAY
+        amount = finalPsbt.txOutputs.reduce(
+          (acc, output) => acc + output.value,
+          0
+        );
+        fee = 0;
+        break;
+
+      case 129: // SIGHASH_ALL | SIGHASH_ANYONECANPAY
+        amount = finalPsbt.txOutputs.reduce(
+          (acc, output) => acc + output.value,
+          0
+        );
+        fee = 0;
+        break;
+
+      case 131: // SIGHASH_SINGLE | SIGHASH_ANYONECANPAY
+        amount = indexes.reduce((acc, index) => {
+          const output = finalPsbt.txOutputs[index];
+          return output ? acc + output.value : acc;
+        }, 0);
+        fee = 0;
+        break;
+
+      default:
+        throw new Error('Unsupported sighash type');
+    }
+
     return {
       rawTx: finalPsbt.toHex(),
+      fee: sb.toBitcoin(fee),
+      amount: sb.toBitcoin(amount),
     };
   }
   // Sign / finalize inputs
@@ -141,11 +194,8 @@ export function signRawPsbt(
   }
 
   // Get total outputs and fee
-  const amount = finalPsbt.txOutputs.reduce(
-    (acc, output) => acc + output.value,
-    0
-  );
-  const fee = finalPsbt.getFee();
+  amount = finalPsbt.txOutputs.reduce((acc, output) => acc + output.value, 0);
+  fee = finalPsbt.getFee();
 
   return {
     ...(withTx && { rawTx: finalPsbt.extractTransaction().toHex() }),

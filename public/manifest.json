@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "MyPepe - Pepecoin Wallet",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Pepecoin wallet for Chrome browser",
   "permissions": ["storage", "tabs", "notifications", "offscreen"],
   "host_permissions": ["http://*/*", "https://*/*"],

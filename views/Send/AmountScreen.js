@@ -149,6 +149,7 @@ export const AmountScreen = ({
       senderAddress: walletAddress,
       recipientAddress: formData.address?.trim(),
       pepeAmount: formData.pepeAmount,
+      feeRate: formData.feeRate,
     };
     const error = validateTransaction({
       ...txData,
@@ -237,86 +238,204 @@ export const AmountScreen = ({
         h='70px'
       >
         {!isCurrencySwapped ? (
-          <Input
-            keyboardType='numeric'
-            // isDisabled={pepecoinPrice === 0}
-            variant='filled'
-            placeholder='0'
-            focusOutlineColor='brandGreen.500'
-            _hover={{
-              borderColor: 'brandGreen.500',
-            }}
-            _invalid={{
-              borderColor: 'red.500',
-              focusOutlineColor: 'red.500',
-              _hover: {
+          <>
+            <Input
+              keyboardType='numeric'
+              // isDisabled={pepecoinPrice === 0}
+              variant='filled'
+              placeholder='0'
+              focusOutlineColor='brandGreen.500'
+              _hover={{
+                borderColor: 'brandGreen.500',
+              }}
+              _invalid={{
                 borderColor: 'red.500',
-              },
-            }}
-            isInvalid={errors.pepeAmount}
-            onChangeText={onChangeTextPepe}
-            onSubmitEditing={onSubmit}
-            autoFocus
-            type='number'
-            fontSize='24px'
-            fontWeight='semibold'
-            _input={{
-              py: '10px',
-              pl: '4px',
-              type: 'number',
-            }}
-            InputLeftElement={
-              <Text fontSize='24px' fontWeight='semibold' px='4px'>
-                Ᵽ
-              </Text>
-            }
-            textAlign='center'
-            ref={pepeInputRef}
-            value={formData.pepeAmount}
-            position='absolute'
-            top={0}
-          />
+                focusOutlineColor: 'red.500',
+                _hover: {
+                  borderColor: 'red.500',
+                },
+              }}
+              isInvalid={errors.pepeAmount}
+              onChangeText={onChangeTextPepe}
+              onSubmitEditing={onSubmit}
+              autoFocus
+              type='number'
+              fontSize='24px'
+              fontWeight='semibold'
+              _input={{
+                py: '10px',
+                pl: '4px',
+                type: 'number',
+              }}
+              InputLeftElement={
+                <Text fontSize='24px' fontWeight='semibold' px='4px'>
+                  Ᵽ
+                </Text>
+              }
+              textAlign='center'
+              ref={pepeInputRef}
+              value={formData.pepeAmount}
+              position='absolute'
+              top={0}
+            />
+            <Input
+              keyboardType='numeric'
+              variant='filled'
+              placeholder='Fee Rate, min 1000'
+              focusOutlineColor='brandGreen.500'
+              _hover={{
+                borderColor: 'brandGreen.500',
+              }}
+              _invalid={{
+                borderColor: 'red.500',
+                focusOutlineColor: 'red.500',
+                _hover: {
+                  borderColor: 'red.500',
+                },
+              }}
+              isInvalid={errors.feeRate}
+              onChangeText={(value) => {
+                const numValue = parseInt(value, 10);
+                if (!Number.isNaN(numValue) && numValue >= 0) {
+                  setFormData((prev) => ({
+                    ...prev,
+                    feeRate: numValue,
+                  }));
+                }
+              }}
+              onBlur={() => {
+                const currentValue = parseInt(formData.feeRate, 10);
+                if (
+                  !formData.feeRate ||
+                  Number.isNaN(currentValue) ||
+                  currentValue < 1000
+                ) {
+                  setFormData((prev) => ({
+                    ...prev,
+                    feeRate: 1000,
+                  }));
+                }
+              }}
+              type='number'
+              fontSize='16px'
+              fontWeight='normal'
+              _input={{
+                py: '6px',
+                pl: '4px',
+                type: 'number',
+              }}
+              InputRightElement={
+                <Text fontSize='12px' color='gray.500' px='4px'>
+                  ribbit/vB
+                </Text>
+              }
+              textAlign='center'
+              value={formData.feeRate}
+              position='absolute'
+              top='60px'
+              size='sm'
+            />
+          </>
         ) : (
-          <Input
-            keyboardType='numeric'
-            variant='filled'
-            placeholder='0'
-            focusOutlineColor='brandGreen.500'
-            _hover={{
-              borderColor: 'brandGreen.500',
-            }}
-            _invalid={{
-              borderColor: 'red.500',
-              focusOutlineColor: 'red.500',
-              _hover: {
+          <>
+            <Input
+              keyboardType='numeric'
+              variant='filled'
+              placeholder='0'
+              focusOutlineColor='brandGreen.500'
+              _hover={{
+                borderColor: 'brandGreen.500',
+              }}
+              _invalid={{
                 borderColor: 'red.500',
-              },
-            }}
-            isInvalid={errors.pepeAmount}
-            onChangeText={onChangeTextFiat}
-            onSubmitEditing={onSubmit}
-            autoFocus
-            type='number'
-            fontSize='24px'
-            fontWeight='semibold'
-            _input={{
-              py: '10px',
-              pl: '4px',
-              type: 'number',
-            }}
-            InputLeftElement={
-              <Text fontSize='24px' fontWeight='semibold' px='4px'>
-                $
-              </Text>
-            }
-            textAlign='center'
-            ref={fiatInputRef}
-            value={formData.fiatAmount}
-            position='absolute'
-            top={0}
-            allowFontScaling
-            adjustsFontSizeToFit
-          />
+                focusOutlineColor: 'red.500',
+                _hover: {
+                  borderColor: 'red.500',
+                },
+              }}
+              isInvalid={errors.pepeAmount}
+              onChangeText={onChangeTextFiat}
+              onSubmitEditing={onSubmit}
+              autoFocus
+              type='number'
+              fontSize='24px'
+              fontWeight='semibold'
+              _input={{
+                py: '10px',
+                pl: '4px',
+                type: 'number',
+              }}
+              InputLeftElement={
+                <Text fontSize='24px' fontWeight='semibold' px='4px'>
+                  $
+                </Text>
+              }
+              textAlign='center'
+              ref={fiatInputRef}
+              value={formData.fiatAmount}
+              position='absolute'
+              top={0}
+              allowFontScaling
+              adjustsFontSizeToFit
+            />
+            <Input
+              keyboardType='numeric'
+              variant='filled'
+              placeholder='Fee Rate, min 1000'
+              focusOutlineColor='brandGreen.500'
+              _hover={{
+                borderColor: 'brandGreen.500',
+              }}
+              _invalid={{
+                borderColor: 'red.500',
+                focusOutlineColor: 'red.500',
+                _hover: {
+                  borderColor: 'red.500',
+                },
+              }}
+              isInvalid={errors.feeRate}
+              onChangeText={(value) => {
+                const numValue = parseInt(value, 10);
+                if (!Number.isNaN(numValue) && numValue >= 0) {
+                  setFormData((prev) => ({
+                    ...prev,
+                    feeRate: numValue,
+                  }));
+                }
+              }}
+              onBlur={() => {
+                const currentValue = parseInt(formData.feeRate, 10);
+                if (
+                  !formData.feeRate ||
+                  Number.isNaN(currentValue) ||
+                  currentValue < 1000
+                ) {
+                  setFormData((prev) => ({
+                    ...prev,
+                    feeRate: 1000,
+                  }));
+                }
+              }}
+              type='number'
+              fontSize='16px'
+              fontWeight='normal'
+              _input={{
+                py: '6px',
+                pl: '4px',
+                type: 'number',
+              }}
+              InputRightElement={
+                <Text fontSize='12px' color='gray.500' px='4px'>
+                  ribbit/vB
+                </Text>
+              }
+              textAlign='center'
+              value={formData.feeRate}
+              position='absolute'
+              top='60px'
+              size='sm'
+            />
+          </>
         )}
       </Box>
 
@@ -371,7 +490,11 @@ export const AmountScreen = ({
           role='button'
           px='28px'
           isDisabled={
-            !Number(formData.pepeAmount) || !addressBalance || errors.pepeAmount
+            !Number(formData.pepeAmount) ||
+            !addressBalance ||
+            errors.pepeAmount ||
+            !Number(formData.feeRate) ||
+            Number(formData.feeRate) < 1000
           }
           loading={loading}
         >

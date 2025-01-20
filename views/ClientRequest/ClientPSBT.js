@@ -94,7 +94,7 @@ export function ClientPSBT({
             const value = sb.toBitcoin(tx.vout[input.index].value);
 
             if (indexes.includes(index)) {
-              amount += tx.vout[input.index].value;
+              amount += Number(tx.vout[input.index].value);
             }
 
             return {
@@ -110,7 +110,59 @@ export function ClientPSBT({
           // Subtract change output
           psbt?.txOutputs?.forEach((output) => {
             if (output.address === connectedClient.address) {
-              amount -= output.value;
+              amount -= Number(output.value);
+            }
+          });
+        } else {
+          switch (sighashType) {
+            case 1:
+              psbt?.txOutputs?.forEach((output) => {
+                if (output.address === connectedClient.address) {
+                  amount -= Number(output.value);
+                }
+              });
+              break;
+            case 3:
+              psbt?.txOutputs?.forEach((output, index) => {
+                if (
+                  output.address === connectedClient.address &&
+                  indexes.includes(index)
+                ) {
+                  amount -= Number(output.value);
+                }
+              });
+              break;
+            case 128:
+              psbt?.txOutputs?.forEach((output) => {
+                if (output.address === connectedClient.address) {
+                  amount -= Number(output.value);
+                }
+              });
+              break;
+            case 129:
+              psbt?.txOutputs?.forEach((output) => {
+                if (output.address === connectedClient.address) {
+                  amount -= Number(output.value);
+                }
+              });
+              break;
+            case 131:
+              psbt?.txOutputs?.forEach((output, index) => {
+                if (
+                  output.address === connectedClient.address &&
+                  indexes.includes(index)
+                ) {
+                  amount -= Number(output.value);
+                }
+              });
+              break;
+            default:
+              break;
+          }
+
+          psbt?.txOutputs?.forEach((output, index) => {
+            if (indexes.includes(index)) {
+              amount -= Number(output.value);
             }
           });
         }

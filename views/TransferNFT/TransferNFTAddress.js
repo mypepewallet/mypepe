@@ -1,4 +1,4 @@
-import { Box, Input, Text, Toast } from 'native-base';
+import { Box, Input, Text, Toast, VStack } from 'native-base';
 import { useCallback, useState } from 'react';
 
 import { BigButton } from '../../components/Button';
@@ -41,8 +41,8 @@ export const TransferNFTAddress = ({
       return false;
     }
     setErrors({});
-    return true;
-  }, [errors, formData.address, setErrors, walletAddress]);
+    return formData.feeRate && Number(formData.feeRate) >= 5000;
+  }, [errors, formData.address, formData.feeRate, setErrors, walletAddress]);
 
   const onSubmit = useCallback(() => {
     if (validate()) {
@@ -55,6 +55,7 @@ export const TransferNFTAddress = ({
             ...selectedNFT,
             address: walletAddress,
             recipientAddress: formData.address.trim(),
+            feeRate: formData.feeRate,
           },
         },
         ({ rawTx, fee, amount }) => {
@@ -97,51 +98,115 @@ export const TransferNFTAddress = ({
   ]);
 
   return (
-    <>
+    <Box display='flex' flexDirection='column' alignItems='center' px='20px'>
       <Text fontSize='xl' pb='16px' textAlign='center' fontWeight='semibold'>
         Transfer NFT
       </Text>
-      <Box borderRadius='12px' overflow='hidden' mb='24px' mx='20px'>
+
+      <Box borderRadius='12px' overflow='hidden' mb='24px' w='100%'>
         <NFTView nft={selectedNFT} />
       </Box>
-      <Input
-        variant='filled'
-        placeholder='Recipient wallet address'
-        py='14px'
-        focusOutlineColor='brandGreen.500'
-        _hover={{
-          borderColor: 'brandGreen.500',
-        }}
-        _invalid={{
-          borderColor: 'red.500',
-          focusOutlineColor: 'red.500',
-          _hover: {
-            borderColor: 'red.500',
-          },
-        }}
-        isInvalid={'address' in errors}
-        onChangeText={onChangeText}
-        onSubmitEditing={onSubmit}
-        autoFocus
-        type='number'
-        value={formData.address}
-        backgroundColor='gray.100'
-      />
-      <Text fontSize='10px' color='red.500' pt='6px'>
-        {errors.address || ' '}
-      </Text>
 
-      <BigButton
-        onPress={onSubmit}
-        w='80%'
-        type='submit'
-        role='button'
-        mt='32px'
-        isDisabled={!formData.address || formData.address.length <= 26}
-        loading={loading}
-      >
-        Next
-      </BigButton>
-    </>
+      <VStack spacing={4} w='100%'>
+        <Box w='100%'>
+          <Input
+            variant='filled'
+            placeholder='Recipient wallet address'
+            py='14px'
+            focusOutlineColor='brandGreen.500'
+            _hover={{
+              borderColor: 'brandGreen.500',
+            }}
+            _invalid={{
+              borderColor: 'red.500',
+              focusOutlineColor: 'red.500',
+              _hover: {
+                borderColor: 'red.500',
+              },
+            }}
+            isInvalid={'address' in errors}
+            onChangeText={onChangeText}
+            onSubmitEditing={onSubmit}
+            autoFocus
+            type='number'
+            value={formData.address}
+            backgroundColor='gray.100'
+          />
+          <Text fontSize='10px' color='red.500' pt='6px'>
+            {errors.address || ' '}
+          </Text>
+        </Box>
+
+        <Box w='100%'>
+          <Input
+            keyboardType='numeric'
+            variant='filled'
+            placeholder='Fee Rate, min 5000'
+            focusOutlineColor='brandGreen.500'
+            _hover={{
+              borderColor: 'brandGreen.500',
+            }}
+            _invalid={{
+              borderColor: 'red.500',
+              focusOutlineColor: 'red.500',
+              _hover: {
+                borderColor: 'red.500',
+              },
+            }}
+            isInvalid={errors.feeRate}
+            onChangeText={(value) => {
+              const numValue = parseInt(value, 10);
+              if (!Number.isNaN(numValue) && numValue >= 0) {
+                setFormData((prev) => ({
+                  ...prev,
+                  feeRate: numValue,
+                }));
+              }
+            }}
+            onBlur={() => {
+              const currentValue = parseInt(formData.feeRate, 10);
+              if (
+                !formData.feeRate ||
+                Number.isNaN(currentValue) ||
+                currentValue < 5000
+              ) {
+                setFormData((prev) => ({
+                  ...prev,
+                  feeRate: 5000,
+                }));
+              }
+            }}
+            type='number'
+            fontSize='16px'
+            fontWeight='normal'
+            _input={{
+              py: '6px',
+              pl: '4px',
+              type: 'number',
+            }}
+            InputRightElement={
+              <Text fontSize='12px' color='gray.500' px='4px'>
+                ribbit/vB
+              </Text>
+            }
+            textAlign='center'
+            value={formData.feeRate}
+            size='sm'
+          />
+        </Box>
+
+        <BigButton
+          onPress={onSubmit}
+          w='80%'
+          type='submit'
+          role='button'
+          mt='32px'
+          isDisabled={!formData.address || formData.address.length <= 26}
+          loading={loading}
+        >
+          Next
+        </BigButton>
+      </VStack>
+    </Box>
   );
 };
